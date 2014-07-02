@@ -3,6 +3,7 @@ package com.prototype.ryersonapp;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -29,7 +30,7 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
-    private DrawerListAdapter listAdapter;
+    private DrawerListAdapter mListAdapter;
     private String[] mDrawerItems = {"Campus Life", "Student Life", "Events", "Others", "Settings", "About Us"};
 
     @Override
@@ -41,8 +42,9 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
+        mListAdapter = new DrawerListAdapter(LayoutInflater.from(this));
         mDrawerList = (ListView) findViewById(R.id.listview_drawer);
-        mDrawerList.setAdapter(new DrawerListAdapter(LayoutInflater.from(this)));
+        mDrawerList.setAdapter(mListAdapter);
         mDrawerList.setOnItemClickListener(this);
 
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
@@ -92,6 +94,8 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         getSupportFragmentManager().beginTransaction().replace(R.id.content_frame_main, new CampusLifeFragment()).commit();
         getActionBar().setTitle(mDrawerItems[i]);
+        mListAdapter.setSelectedItem(i);
+        mListAdapter.notifyDataSetChanged();
         mDrawerLayout.closeDrawer(mDrawerList);
     }
 
