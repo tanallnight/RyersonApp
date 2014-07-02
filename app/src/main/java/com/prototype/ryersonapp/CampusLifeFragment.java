@@ -10,11 +10,13 @@ import android.view.ViewGroup;
 /**
  * Created by Tanmay on 2014-07-01.
  */
-public class DrawerLayoutFragment extends Fragment{
+public class CampusLifeFragment extends Fragment{
+
+    View rootView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_navigationdrawer, container, false);
+        rootView = inflater.inflate(R.layout.fragment_campuslife, container, false);
 
         return rootView;
     }

@@ -2,23 +2,35 @@ package com.prototype.ryersonapp;
 
 import android.app.Activity;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements AdapterView.OnItemClickListener {
 
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
+    private DrawerListAdapter listAdapter;
+    private String[] mDrawerItems = {"Campus Life", "Student Life", "Events", "Others", "Settings", "About Us"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +40,13 @@ public class MainActivity extends FragmentActivity {
         getActionBar().setHomeButtonEnabled(true);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_drawer, new DrawerLayoutFragment()).commit();
+
+        mDrawerList = (ListView) findViewById(R.id.listview_drawer);
+        mDrawerList.setAdapter(new DrawerListAdapter(LayoutInflater.from(this)));
+        mDrawerList.setOnItemClickListener(this);
 
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer, R.string.drawer_open, R.string.drawer_close){
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer, R.string.drawer_open, R.string.drawer_close) {
 
             @Override
             public void onDrawerClosed(View drawerView) {
@@ -43,9 +58,9 @@ public class MainActivity extends FragmentActivity {
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 invalidateOptionsMenu();
+                getActionBar().setTitle("Ryerson App");
             }
         };
-
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
@@ -68,8 +83,72 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(mDrawerToggle.onOptionsItemSelected(item))
+        if (mDrawerToggle.onOptionsItemSelected(item))
             return true;
         return super.onOptionsItemSelected(item);
     }
-}
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame_main, new CampusLifeFragment()).commit();
+        getActionBar().setTitle(mDrawerItems[i]);
+        mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+    public class DrawerListAdapter extends BaseAdapter {
+
+        private LayoutInflater inflater;
+        private int mSelectedItem;
+        private int[] mDrawerDrawables = {R.drawable.ic_settings, R.drawable.ic_about};
+
+        public DrawerListAdapter(LayoutInflater inflater) {
+            this.inflater = inflater;
+        }
+
+        public int getSelectedItem() {
+            return mSelectedItem;
+        }
+
+        public void setSelectedItem(int i) {
+            mSelectedItem = i;
+        }
+
+        @Override
+        public int getCount() {
+            return mDrawerItems.length;
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+
+            if (position <= 3) {
+                convertView = inflater.inflate(R.layout.layout_drawer_primary, null);
+                TextView titlePrimary = (TextView) convertView.findViewById(R.id.textView_drawer_list_primary);
+                titlePrimary.setText(mDrawerItems[position]);
+                titlePrimary.setTextColor((mSelectedItem == position) ? Color.parseColor("#3f51b5") : Color.parseColor("#454545"));
+
+                return convertView;
+            } else {
+                    convertView = inflater.inflate(R.layout.layout_drawer_secondary, null);
+                    TextView titlesecondary = (TextView) convertView.findViewById(R.id.textView_drawer_list_secondary);
+                    titlesecondary.setText(mDrawerItems[position]);
+
+                    ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView_drawer_list_secondary);
+                    imageView.setImageResource(mDrawerDrawables[position - 4]);
+
+                    return convertView;
+                }
+
+            }
+        }
+    }
