@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
-    android:background="@android:color/white"
+    android:paddingRight="16dp"
+    android:background="@drawable/drawer_list_selector"
     android:id="@+id/drawer_primary_linearLayout"
     android:paddingTop="20dp"
     android:paddingBottom="20dp">

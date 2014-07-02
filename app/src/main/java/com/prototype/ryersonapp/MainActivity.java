@@ -3,6 +3,7 @@ package com.prototype.ryersonapp;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -40,6 +41,8 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 
+        getSupportFragmentManager().beginTransaction().add(R.id.content_frame_main, new CampusLifeFragment()).commit();
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         mListAdapter = new DrawerListAdapter(LayoutInflater.from(this));
@@ -54,6 +57,7 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
                 invalidateOptionsMenu();
+                getActionBar().setTitle(mDrawerItems[mListAdapter.getSelectedItem()]);
             }
 
             @Override
@@ -144,12 +148,11 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
                 return convertView;
             } else {
                     convertView = inflater.inflate(R.layout.layout_drawer_secondary, null);
-                    TextView titlesecondary = (TextView) convertView.findViewById(R.id.textView_drawer_list_secondary);
-                    titlesecondary.setText(mDrawerItems[position]);
+                    TextView titleSecondary = (TextView) convertView.findViewById(R.id.textView_drawer_list_secondary);
+                    titleSecondary.setText(mDrawerItems[position]);
 
                     ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView_drawer_list_secondary);
                     imageView.setImageResource(mDrawerDrawables[position - 4]);
-
                     return convertView;
                 }
 
