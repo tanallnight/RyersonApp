@@ -41,6 +41,7 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 
+        getActionBar().setTitle(mDrawerItems[0]);
         getSupportFragmentManager().beginTransaction().add(R.id.content_frame_main, new CampusLifeFragment()).commit();
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
