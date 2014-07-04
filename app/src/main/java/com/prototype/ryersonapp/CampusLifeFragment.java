@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 /**
  * Created by Tanmay on 2014-07-01.
  */
@@ -33,8 +35,11 @@ public class CampusLifeFragment extends Fragment implements AdapterView.OnItemCl
         mListView = (ListView) rootView.findViewById(R.id.listview_campuslife);
         adapter = new CampusLifeListAdapter(getActivity().getLayoutInflater());
 
-        mListView.setAdapter(adapter);
+        ImageView headerImage = (ImageView) header.findViewById(R.id.imageview_campuslife_list_header);
+        Picasso.with(getActivity()).load(R.raw.campuslife_header).into(headerImage);
+
         mListView.addHeaderView(header);
+        mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(this);
 
         return rootView;
@@ -77,7 +82,7 @@ public class CampusLifeFragment extends Fragment implements AdapterView.OnItemCl
             title.setText(listTitles[i]);
 
             ImageView image = (ImageView) view.findViewById(R.id.imageview_campuslife_list);
-            image.setImageResource(listImages[i]);
+            Picasso.with(getActivity()).load(listImages[i]).into(image);
 
             return view;
         }

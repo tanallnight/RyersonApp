@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -38,21 +39,28 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 
-        getActionBar().setTitle(mDrawerItems[0]);
-        getSupportFragmentManager().beginTransaction().add(R.id.content_frame_main, new CampusLifeFragment()).commit();
+        if (savedInstanceState == null) {
+            getActionBar().setTitle(mDrawerItems[0]);
+            getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                    .add(R.id.content_frame_main, new CampusLifeFragment())
+                    .commit();
+        }
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
         mListAdapter = new DrawerListAdapter(LayoutInflater.from(this));
         mDrawerList = (ListView) findViewById(R.id.listview_drawer);
         mDrawerList.setAdapter(mListAdapter);
         mDrawerList.setOnItemClickListener(this);
 
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer, R.string.drawer_open, R.string.drawer_close) {
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer,
+                R.string.drawer_open, R.string.drawer_close) {
 
             @Override
             public void onDrawerClosed(View drawerView) {
@@ -97,9 +105,15 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Fragment fragment = null;
 
-        switch (i){
+        getActionBar().setTitle(mDrawerItems[i]);
+        mListAdapter.setSelectedItem(i);
+        mListAdapter.notifyDataSetChanged();
+        mDrawerLayout.closeDrawer(mDrawerList);
+
+        boolean isFragment = true;
+        Fragment fragment = null;
+        switch (i) {
             case 0:
                 fragment = new CampusLifeFragment();
                 break;
@@ -111,11 +125,17 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
                 break;
         }
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame_main, fragment).commit();
-        getActionBar().setTitle(mDrawerItems[i]);
-        mListAdapter.setSelectedItem(i);
-        mListAdapter.notifyDataSetChanged();
-        mDrawerLayout.closeDrawer(mDrawerList);
+        final Fragment finalFragment = fragment;
+        new android.os.Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                        .replace(R.id.content_frame_main, finalFragment)
+                        .commit();
+            }
+        }, 250);
+
     }
 
     public class DrawerListAdapter extends BaseAdapter {
@@ -162,15 +182,15 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
 
                 return convertView;
             } else {
-                    convertView = inflater.inflate(R.layout.layout_drawer_secondary, null);
-                    TextView titleSecondary = (TextView) convertView.findViewById(R.id.textView_drawer_list_secondary);
-                    titleSecondary.setText(mDrawerItems[position]);
+                convertView = inflater.inflate(R.layout.layout_drawer_secondary, null);
+                TextView titleSecondary = (TextView) convertView.findViewById(R.id.textView_drawer_list_secondary);
+                titleSecondary.setText(mDrawerItems[position]);
 
-                    ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView_drawer_list_secondary);
-                    imageView.setImageResource(mDrawerDrawables[position - 4]);
-                    return convertView;
-                }
-
+                ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView_drawer_list_secondary);
+                imageView.setImageResource(mDrawerDrawables[position - 4]);
+                return convertView;
             }
+
         }
     }
+}
