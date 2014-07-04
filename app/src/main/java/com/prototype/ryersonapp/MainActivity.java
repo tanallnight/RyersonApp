@@ -97,7 +97,21 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame_main, new CampusLifeFragment()).commit();
+        Fragment fragment = null;
+
+        switch (i){
+            case 0:
+                fragment = new CampusLifeFragment();
+                break;
+            case 1:
+                fragment = new StudentLifeFragment();
+                break;
+            default:
+                fragment = new StudentLifeFragment();
+                break;
+        }
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame_main, fragment).commit();
         getActionBar().setTitle(mDrawerItems[i]);
         mListAdapter.setSelectedItem(i);
         mListAdapter.notifyDataSetChanged();
