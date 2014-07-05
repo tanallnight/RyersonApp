@@ -15,9 +15,6 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-/**
- * Created by Tanmay on 2014-07-01.
- */
 public class CampusLifeFragment extends Fragment implements AdapterView.OnItemClickListener{
 
     private View rootView;

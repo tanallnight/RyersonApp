@@ -7,9 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * Created by Tanmay on 2014-07-03.
- */
 public class StudentLifeFragment extends Fragment{
 
     private View rootView;

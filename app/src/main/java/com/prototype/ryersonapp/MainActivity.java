@@ -1,12 +1,9 @@
 package com.prototype.ryersonapp;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -19,9 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,6 +24,7 @@ import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity implements AdapterView.OnItemClickListener {
 
+    private int visibleFragment = 0;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -38,6 +34,7 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("MainActivity", "onCreate");
         setContentView(R.layout.activity_main);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -46,7 +43,8 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
         if (savedInstanceState == null) {
             getActionBar().setTitle(mDrawerItems[0]);
             getSupportFragmentManager().beginTransaction()
-                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                    // .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                    .setCustomAnimations(R.anim.slide_up_enter, R.anim.slide_up_exit)
                     .add(R.id.content_frame_main, new CampusLifeFragment())
                     .commit();
         }
@@ -66,7 +64,7 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
                 invalidateOptionsMenu();
-                getActionBar().setTitle(mDrawerItems[mListAdapter.getSelectedItem()]);
+                getActionBar().setTitle(mDrawerItems[visibleFragment]);
             }
 
             @Override
@@ -80,24 +78,36 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("MainActivity", "onRestart");
+        mListAdapter.setSelectedItem(visibleFragment);
+        mListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        Log.d("MainActivity", "onPrepareOptionMenu");
         return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+        Log.d("MainActivity", "onPostCreate");
         mDrawerToggle.syncState();
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        Log.d("MainActivity", "onConfigurationChanged");
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d("MainActivity", "onOptionsItemSelected");
         if (mDrawerToggle.onOptionsItemSelected(item))
             return true;
         return super.onOptionsItemSelected(item);
@@ -105,37 +115,48 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Log.d("MainActivity", "onItemClick " + i);
+        if (visibleFragment != i) {
+            mListAdapter.setSelectedItem(i);
+            mListAdapter.notifyDataSetChanged();
 
-        getActionBar().setTitle(mDrawerItems[i]);
-        mListAdapter.setSelectedItem(i);
-        mListAdapter.notifyDataSetChanged();
-        mDrawerLayout.closeDrawer(mDrawerList);
-
-        boolean isFragment = true;
-        Fragment fragment = null;
-        switch (i) {
-            case 0:
-                fragment = new CampusLifeFragment();
-                break;
-            case 1:
-                fragment = new StudentLifeFragment();
-                break;
-            default:
-                fragment = new StudentLifeFragment();
-                break;
-        }
-
-        final Fragment finalFragment = fragment;
-        new android.os.Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getSupportFragmentManager().beginTransaction()
-                        .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                        .replace(R.id.content_frame_main, finalFragment)
-                        .commit();
+            boolean isFragment = true;
+            Fragment fragment = null;
+            switch (i) {
+                case 0:
+                    fragment = new CampusLifeFragment();
+                    setVisibleFragment(i);
+                    break;
+                case 1:
+                    fragment = new StudentLifeFragment();
+                    setVisibleFragment(i);
+                    break;
+                case 5:
+                    isFragment = false;
+                    startActivity(new Intent("android.intent.action.RYERSONABOUTUS"));
+                    break;
             }
-        }, 250);
 
+            if (isFragment) {
+                final Fragment finalFragment = fragment;
+                getActionBar().setTitle(mDrawerItems[i]);
+                new android.os.Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getSupportFragmentManager().beginTransaction()
+                                //.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                                .setCustomAnimations(R.anim.slide_up_enter, R.anim.slide_up_exit)
+                                .replace(R.id.content_frame_main, finalFragment)
+                                .commit();
+                    }
+                }, 250);
+            }
+        }
+        mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+    public void setVisibleFragment(int i) {
+        visibleFragment = i;
     }
 
     public class DrawerListAdapter extends BaseAdapter {
