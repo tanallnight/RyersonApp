@@ -4,7 +4,6 @@
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
         <item name="android:windowContentOverlay">@drawable/drawer_shadow_horizontal</item>
         <item name="android:actionBarStyle">@style/actionBarStyle</item>
-
     </style>
 
     <style name="actionBarStyle" parent="android:Widget.Holo.Light.ActionBar.Solid.Inverse">

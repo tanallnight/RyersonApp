@@ -28,4 +28,5 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:support-v4:20.+'
     compile files('libs/picasso-2.3.2.jar')
+    compile 'com.viewpagerindicator:library:2.4.1@aar'
 }

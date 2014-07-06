@@ -1,9 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#3f51b5">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="none">
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#eeeeee"
+        android:orientation="vertical">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager_studentlife_offers_banner"
+            android:layout_width="match_parent"
+            android:paddingLeft="8dp"
+            android:paddingTop="8dp"
+            android:paddingRight="25dp"
+            android:clipToPadding="false"
+            android:layout_height="200dp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:background="@drawable/card_round"
+                android:baselineAligned="false"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Explore"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="#454545"
+                    android:textSize="30sp" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="?android:attr/listDivider" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:weightSum="4">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/studentuslife_icons_coffee"
+                        android:text="Coffee"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:background="@drawable/image_button_grey_selector"
+                        android:clickable="true"
+                        android:textColor="#454545" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/studentuslife_icons_eat"
+                        android:text="Eat"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:background="@drawable/image_button_grey_selector"
+                        android:clickable="true"
+                        android:textColor="#454545" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/studentuslife_icons_drink"
+                        android:text="Drink"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:background="@drawable/image_button_grey_selector"
+                        android:clickable="true"
+                        android:textColor="#454545" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableTop="@drawable/studentuslife_icons_shop"
+                        android:text="Shop"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:background="@drawable/image_button_grey_selector"
+                        android:clickable="true"
+                        android:textColor="#454545" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/card_round"
+                android:baselineAligned="false"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Favourites"
+                    android:fontFamily="sans-serif-light"
+                    android:textColor="#454545"
+                    android:textSize="30sp" />
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="?android:attr/listDivider" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:text="@string/nothing_here"
+                    android:textColor="#888888"
+                    android:layout_marginBottom="100dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
