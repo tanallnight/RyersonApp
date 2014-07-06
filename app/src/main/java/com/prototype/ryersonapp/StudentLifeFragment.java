@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -19,16 +21,19 @@ import com.viewpagerindicator.CirclePageIndicator;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class StudentLifeFragment extends Fragment {
+public class StudentLifeFragment extends Fragment implements View.OnClickListener {
 
     private View rootView;
     private ViewPager viewPager;
     private CirclePageIndicator circlePageIndicator;
     private int pos;
+    private TextView coffee, eat, drink, shop;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_studentlife, container, false);
+
+        initialize();
 
         viewPager = (ViewPager) rootView.findViewById(R.id.pager_studentlife_offers_banner);
         viewPager.setAdapter(new StudentLifeSlideAdapter(getActivity().getSupportFragmentManager()));
@@ -53,6 +58,24 @@ public class StudentLifeFragment extends Fragment {
         }, 1, 5000);
 
         return rootView;
+    }
+
+    private void initialize(){
+
+        coffee = (TextView) rootView.findViewById(R.id.textview_studentlif_coffee);
+        eat = (TextView) rootView.findViewById(R.id.textview_studentlif_eat);
+        drink = (TextView) rootView.findViewById(R.id.textview_studentlif_drink);
+        shop = (TextView) rootView.findViewById(R.id.textview_studentlif_shop);
+
+        coffee.setOnClickListener(this);
+        eat.setOnClickListener(this);
+        drink.setOnClickListener(this);
+        shop.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        Toast.makeText(getActivity(), "Click " + view.getId(), Toast.LENGTH_SHORT).show();
     }
 
     public static class StudentLifeBannerFragment extends Fragment {
