@@ -131,6 +131,10 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
                     fragment = new StudentLifeFragment();
                     setVisibleFragment(i);
                     break;
+                case 2:
+                    fragment = new EventsFragment();
+                    setVisibleFragment(i);
+                    break;
                 case 5:
                     isFragment = false;
                     startActivity(new Intent("android.intent.action.RYERSONABOUTUS"));
