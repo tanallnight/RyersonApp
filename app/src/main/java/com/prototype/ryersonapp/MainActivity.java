@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity implements AdapterView.OnItemClickListener {
 
+    //private int previousFragment = 0;
     private int visibleFragment = 0;
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
@@ -143,13 +145,16 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
 
             if (isFragment) {
                 final Fragment finalFragment = fragment;
+                final int clickPosition = i;
                 getActionBar().setTitle(mDrawerItems[i]);
                 new android.os.Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        FragmentManager fragmentManager = getSupportFragmentManager();
                         getSupportFragmentManager().beginTransaction()
-                                //.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                                .setCustomAnimations(R.anim.slide_up_enter, R.anim.slide_up_exit)
+                                //.setCustomAnimations((previousFragment < clickPosition) ? R.anim.slide_up_enter : R.anim.slide_down_enter,
+                                  //      (previousFragment < clickPosition) ? R.anim.slide_up_exit : R.anim.slide_down_exit)
+                                .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_right_exit)
                                 .replace(R.id.content_frame_main, finalFragment)
                                 .commit();
                     }
@@ -157,6 +162,7 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
             }
         }
         mDrawerLayout.closeDrawer(mDrawerList);
+        //previousFragment = i;
     }
 
     public void setVisibleFragment(int i) {

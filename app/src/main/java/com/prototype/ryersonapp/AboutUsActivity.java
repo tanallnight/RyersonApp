@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,7 +46,7 @@ public class AboutUsActivity extends FragmentActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private class AboutUsSlideAdapter extends FragmentStatePagerAdapter {
+    private class AboutUsSlideAdapter extends FragmentPagerAdapter {
 
         public AboutUsSlideAdapter(FragmentManager fragmentManager){
             super(fragmentManager);
@@ -56,6 +58,7 @@ public class AboutUsActivity extends FragmentActivity {
             Bundle args = new Bundle();
             args.putInt("POSITION", i);
             fragment.setArguments(args);
+            Log.d("Viewpager position", "" + i);
 
             return fragment;
         }
@@ -75,7 +78,8 @@ public class AboutUsActivity extends FragmentActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             Bundle b = getArguments();
-            position = b.getInt("POS");
+            position = b.getInt("POSITION");
+            Log.d("Viewpager bundle out", "" + position);
         }
 
         @Override
