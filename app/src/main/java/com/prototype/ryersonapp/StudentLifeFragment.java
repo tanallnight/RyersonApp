@@ -21,7 +21,7 @@ import com.viewpagerindicator.CirclePageIndicator;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class StudentLifeFragment extends Fragment implements View.OnClickListener {
+public class StudentLifeFragment extends Fragment{
 
     private View rootView;
     private ViewPager viewPager;
@@ -42,7 +42,7 @@ public class StudentLifeFragment extends Fragment implements View.OnClickListene
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                if (viewPager.getCurrentItem() == 2) {
+                if (viewPager.getCurrentItem() == 4) {
                     pos = 0;
                 }
                 viewPager.setCurrentItem(pos++, true);
@@ -62,20 +62,6 @@ public class StudentLifeFragment extends Fragment implements View.OnClickListene
 
     private void initialize(){
 
-        coffee = (TextView) rootView.findViewById(R.id.textview_studentlif_coffee);
-        eat = (TextView) rootView.findViewById(R.id.textview_studentlif_eat);
-        drink = (TextView) rootView.findViewById(R.id.textview_studentlif_drink);
-        shop = (TextView) rootView.findViewById(R.id.textview_studentlif_shop);
-
-        coffee.setOnClickListener(this);
-        eat.setOnClickListener(this);
-        drink.setOnClickListener(this);
-        shop.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View view) {
-        Toast.makeText(getActivity(), "Click " + view.getId(), Toast.LENGTH_SHORT).show();
     }
 
     public static class StudentLifeBannerFragment extends Fragment {
@@ -107,6 +93,12 @@ public class StudentLifeFragment extends Fragment implements View.OnClickListene
                 case 2:
                     Picasso.with(getActivity()).load(R.raw.campuslife_header).into(image);
                     break;
+                case 3:
+                    Picasso.with(getActivity()).load(R.raw.campuslife_header).into(image);
+                    break;
+                case 4:
+                    Picasso.with(getActivity()).load(R.raw.campuslife_header).into(image);
+                    break;
             }
 
             return rootView;
@@ -132,7 +124,7 @@ public class StudentLifeFragment extends Fragment implements View.OnClickListene
 
         @Override
         public int getCount() {
-            return 3;
+            return 5;
         }
     }
 }

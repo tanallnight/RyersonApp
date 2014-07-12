@@ -13,5 +13,22 @@
     <string name="Favourites">Favourites</string>
     <string name="nothing_here">Nothing Here :(</string>
     <string name="team">Team</string>
+    <string name="contributions_caps">CONTRIBUTIONS</string>
+    <string name="iconography">Iconography</string>
+    <string name="prefs_about_category">ABOUT</string>
+    <string name="images">Images</string>
+    <string name="prefs_about_appVersion">App Version</string>
+    <string name="prefs_about_appVersion_value">0.1 Pre-Alpha</string>
+
+    <string name="SimpleIcon">SimpleIcon</string>
+    <string name="Situ_Herrera">Situ Herrera</string>
+    <string name="Scott_de_Jonge">Scott de Jonge</string>
+    <string name="Designmodo">Designmodo</string>
+    <string name="Amit_Jakhu">Amit Jakhu</string>
+    <string name="Freepik">Freepik</string>
+    <string name="Icomoon">Icomoon</string>
+    <string name="Icons8">Icons8</string>
+
+    <string name="Farhan_Riaz">Farhan Riaz</string>
 
 </resources>

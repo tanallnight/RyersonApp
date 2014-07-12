@@ -8,7 +8,6 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="#eeeeee"
         android:orientation="vertical">
 
         <android.support.v4.view.ViewPager
@@ -56,53 +55,41 @@
                     android:orientation="horizontal"
                     android:weightSum="4">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableTop="@drawable/studentuslife_icons_coffee"
-                        android:text="Coffee"
-                        android:id="@+id/textview_studentlif_coffee"
+                    <ImageView
+                        android:layout_width="@dimen/studentlife_explore_icons_size"
+                        android:layout_height="@dimen/studentlife_explore_icons_size"
+                        android:src="@drawable/studentuslife_icons_coffee"
+                        android:scaleType="centerInside"
+                        android:layout_margin="@dimen/studentlife_explore_icons_margin"
                         android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/image_button_grey_selector"
-                        android:clickable="true"
-                        android:textColor="#454545" />
+                        android:clickable="true" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableTop="@drawable/studentuslife_icons_eat"
-                        android:text="Eat"
-                        android:id="@+id/textview_studentlif_eat"
+                    <ImageView
+                        android:layout_width="@dimen/studentlife_explore_icons_size"
+                        android:layout_height="@dimen/studentlife_explore_icons_size"
+                        android:src="@drawable/studentuslife_icons_eat"
+                        android:scaleType="centerInside"
                         android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/image_button_grey_selector"
-                        android:clickable="true"
-                        android:textColor="#454545" />
+                        android:layout_margin="@dimen/studentlife_explore_icons_margin"
+                        android:clickable="true" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableTop="@drawable/studentuslife_icons_drink"
-                        android:text="Drink"
-                        android:id="@+id/textview_studentlif_drink"
+                    <ImageView
+                        android:layout_width="@dimen/studentlife_explore_icons_size"
+                        android:layout_height="@dimen/studentlife_explore_icons_size"
+                        android:src="@drawable/studentuslife_icons_drink"
+                        android:scaleType="centerInside"
                         android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/image_button_grey_selector"
-                        android:clickable="true"
-                        android:textColor="#454545" />
+                        android:layout_margin="@dimen/studentlife_explore_icons_margin"
+                        android:clickable="true" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableTop="@drawable/studentuslife_icons_shop"
-                        android:text="Shop"
-                        android:id="@+id/textview_studentlif_shop"
+                    <ImageView
+                        android:layout_width="@dimen/studentlife_explore_icons_size"
+                        android:layout_height="@dimen/studentlife_explore_icons_size"
+                        android:src="@drawable/studentuslife_icons_shop"
+                        android:scaleType="centerInside"
                         android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:background="@drawable/image_button_grey_selector"
-                        android:clickable="true"
-                        android:textColor="#454545" />
+                        android:layout_margin="@dimen/studentlife_explore_icons_margin"
+                        android:clickable="true" />
 
 
                 </LinearLayout>
