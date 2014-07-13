@@ -5,13 +5,18 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -20,7 +25,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class EventsFragment extends Fragment {
+public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
 
     private static final String TAG_EVENTS = "events";
     private static final String TAG_ID = "id";
@@ -32,11 +37,16 @@ public class EventsFragment extends Fragment {
     private static final String TAG_TO = "to";
     private static String url = "https://dl.dropboxusercontent.com/u/69305400/json_test/";
 
-    JSONArray events = null;
-    ArrayList<HashMap<String, String>> eventList;
+    private JSONArray events = null;
+    private ArrayList<HashMap<String, String>> eventList;
     private ProgressDialog progressDialog;
     private View rootView;
     private ListView listView;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private TextView errorText;
+    private boolean dataFound = true;
+    private eventsListAdapter adapter;
+    private GetContacts getContacts;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,7 +54,19 @@ public class EventsFragment extends Fragment {
 
         eventList = new ArrayList<HashMap<String, String>>();
         listView = (ListView) rootView.findViewById(R.id.listview_events);
-        new GetContacts().execute();
+        swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swiperefresh_container_events);
+        errorText = (TextView) rootView.findViewById(R.id.textview_nodatafound);
+        errorText.setVisibility(View.GONE);
+
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
+        listView.setOnScrollListener(this);
+        getContacts = new GetContacts();
+
+        getContacts.execute();
 
 
         return rootView;
@@ -55,15 +77,34 @@ public class EventsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
     }
 
+    @Override
+    public void onRefresh() {
+
+        new GetContacts().execute();
+        if (dataFound) {
+            adapter.notifyDataSetChanged();
+        }
+
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView absListView, int i) {
+
+    }
+
+    @Override
+    public void onScroll(AbsListView absListView, int i, int i2, int i3) {
+        int topRowVeritcalPosition = (listView == null || listView.getChildCount() == 0) ?
+                0 : listView.getChildAt(0).getTop();
+        swipeRefreshLayout.setEnabled(topRowVeritcalPosition >= 0);
+    }
+
     private class GetContacts extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            progressDialog = new ProgressDialog(getActivity());
-            progressDialog.setMessage("Please wait...");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
+            swipeRefreshLayout.setRefreshing(true);
         }
 
         @Override
@@ -75,6 +116,8 @@ public class EventsFragment extends Fragment {
 
             if (jsonStr != null) {
                 try {
+
+                    eventList.clear();
                     JSONObject jsonObject = new JSONObject(jsonStr);
                     events = jsonObject.getJSONArray(TAG_EVENTS);
 
@@ -99,12 +142,15 @@ public class EventsFragment extends Fragment {
                         event.put("IMAGE", Integer.toString(R.drawable.campuslife_icons_bookstore));
 
                         eventList.add(event);
+                        dataFound = true;
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             } else {
                 Log.e("ServiceHandler", "Could not get data from url");
+                dataFound = false;
             }
 
             return null;
@@ -114,15 +160,63 @@ public class EventsFragment extends Fragment {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            if (progressDialog.isShowing())
-                progressDialog.dismiss();
+            if (swipeRefreshLayout.isRefreshing()) {
+                swipeRefreshLayout.setRefreshing(false);
+            }
 
-            ListAdapter adapter = new SimpleAdapter(getActivity(), eventList,
-                    R.layout.layout_list_events,
-                    new String[]{TAG_NAME, TAG_DESCRIPTION, TAG_ORGANIZER, "IMAGE"},
-                    new int[]{R.id.name, R.id.email, R.id.mobile, R.id.imageview_events_list});
+            if (dataFound) {
+                adapter = new eventsListAdapter();
+                listView.setAdapter(adapter);
+                listView.setVisibility(View.VISIBLE);
+                errorText.setVisibility(View.GONE);
+            } else {
+                listView.setVisibility(View.GONE);
+                errorText.setVisibility(View.VISIBLE);
+            }
+        }
+    }
 
-            listView.setAdapter(adapter);
+    public class eventsListAdapter extends BaseAdapter {
+
+        private LayoutInflater inflater;
+
+        public eventsListAdapter() {
+            inflater = LayoutInflater.from(getActivity());
+        }
+
+        @Override
+        public int getCount() {
+            return events.length();
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+
+            Log.d("EVENTS", "getView");
+            View listLayoutView = inflater.inflate(R.layout.layout_list_events, null);
+            String title = eventList.get(i).get(TAG_NAME);
+            String description = eventList.get(i).get(TAG_DESCRIPTION);
+            String organizer = eventList.get(i).get(TAG_ORGANIZER);
+
+            TextView name = (TextView) listLayoutView.findViewById(R.id.name);
+            TextView desc = (TextView) listLayoutView.findViewById(R.id.email);
+            TextView orga = (TextView) listLayoutView.findViewById(R.id.mobile);
+
+            name.setText(title);
+            desc.setText(description);
+            orga.setText(organizer);
+
+            return listLayoutView;
         }
     }
 }

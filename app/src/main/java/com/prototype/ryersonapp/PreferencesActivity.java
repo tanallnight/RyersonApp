@@ -29,7 +29,6 @@ public class PreferencesActivity extends Activity {
     public static class MainPreferenceFragment extends PreferenceFragment {
         @Override
         public void onCreate(Bundle savedInstanceState) {
-            // TODO Auto-generated method stub
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.main_preference);
         }
