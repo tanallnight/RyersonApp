@@ -12,17 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 
 public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, AbsListView.OnScrollListener {
@@ -35,6 +35,7 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private static final String TAG_TIME = "time";
     private static final String TAG_FROM = "from";
     private static final String TAG_TO = "to";
+    private static final String TAG_DATE = "date";
     private static String url = "https://dl.dropboxusercontent.com/u/69305400/json_test/";
 
     private JSONArray events = null;
@@ -128,6 +129,7 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
                         String name = c.getString(TAG_NAME);
                         String description = c.getString(TAG_DESCRIPTION);
                         String organizer = c.getString(TAG_ORGANIZER);
+                        String date = c.getString(TAG_DATE);
 
                         JSONObject time = c.getJSONObject(TAG_TIME);
                         String time_from = time.getString(TAG_FROM);
@@ -138,13 +140,14 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
                         event.put(TAG_ID, id);
                         event.put(TAG_NAME, name);
                         event.put(TAG_DESCRIPTION, description);
-                        event.put(TAG_ORGANIZER, organizer);
+                        event.put(TAG_DATE, date);
                         event.put("IMAGE", Integer.toString(R.drawable.campuslife_icons_bookstore));
 
                         eventList.add(event);
-                        dataFound = true;
-
                     }
+                    dataFound = true;
+                    Collections.sort(eventList, new dateComparator());
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -173,6 +176,14 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
                 listView.setVisibility(View.GONE);
                 errorText.setVisibility(View.VISIBLE);
             }
+        }
+    }
+
+    public class dateComparator implements Comparator<HashMap<String, String>>{
+
+        @Override
+        public int compare(HashMap<String, String> stringStringHashMap, HashMap<String, String> stringStringHashMap2) {
+            return stringStringHashMap.get(TAG_NAME).compareTo(stringStringHashMap2.get(TAG_NAME));
         }
     }
 
@@ -206,7 +217,9 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
             View listLayoutView = inflater.inflate(R.layout.layout_list_events, null);
             String title = eventList.get(i).get(TAG_NAME);
             String description = eventList.get(i).get(TAG_DESCRIPTION);
-            String organizer = eventList.get(i).get(TAG_ORGANIZER);
+            String date = eventList.get(i).get(TAG_DATE);
+            Date d = new Date(Long.parseLong(date));
+            CharSequence dateFromatted = d.toString().subSequence(0, 10);
 
             TextView name = (TextView) listLayoutView.findViewById(R.id.name);
             TextView desc = (TextView) listLayoutView.findViewById(R.id.email);
@@ -214,7 +227,7 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
             name.setText(title);
             desc.setText(description);
-            orga.setText(organizer);
+            orga.setText(dateFromatted);
 
             return listLayoutView;
         }
