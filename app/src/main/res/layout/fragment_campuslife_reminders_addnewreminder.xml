@@ -75,10 +75,10 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/image_button_grey_selector"
             android:text="Cancel"
-            android:layout_weight="7"
+            android:layout_weight="6"
             android:textAllCaps="true"
             android:textStyle="bold"
             android:textSize="20sp"
@@ -86,10 +86,10 @@
 
         <Button
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@drawable/image_button_grey_selector"
             android:text="Add"
-            android:layout_weight="3"
+            android:layout_weight="4"
             android:textColor="@android:color/holo_blue_dark"
             android:textAllCaps="true"
             android:textStyle="bold"

@@ -25,7 +25,7 @@ public class CampusLifeFragment extends Fragment implements AdapterView.OnItemCl
             R.drawable.campuslife_icons_directory, R.drawable.campuslife_icons_bookstore};
 
     @Override
-    public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d("CampusLifeFragment", "onCreateView");
         getActivity().getActionBar().setTitle("Campus Life");
         rootView = inflater.inflate(R.layout.fragment_campuslife, container, false);
@@ -52,24 +52,30 @@ public class CampusLifeFragment extends Fragment implements AdapterView.OnItemCl
 
         MainActivity mainActivity = (MainActivity) getActivity();
         Fragment fragment = null;
+        boolean isFragment = true;
 
         switch (i) {
-            case 2:
-                fragment = new RemindersFragment();
+            case 0:
                 break;
-            case 4:
+            case 1:
+                break;
+            case 2:
+                isFragment = false;
+                startActivity(new Intent(getActivity(), RemindersActivity.class));
+                break;
+            case 3:
                 fragment = new BookstoreFragment();
                 break;
-            default:
-                Log.d("CampusLife List", "" + i);
-                break;
         }
-        mainActivity.mDrawerToggle.setDrawerIndicatorEnabled(false);
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_right_exit, R.anim.slide_left_exit, R.anim.slide_left_enter)
-                .replace(R.id.content_frame_main, fragment)
-                .addToBackStack(null)
-                .commit();
+
+        if (isFragment && fragment != null) {
+            mainActivity.mDrawerToggle.setDrawerIndicatorEnabled(false);
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_right_exit, R.anim.slide_left_exit, R.anim.slide_left_enter)
+                    .replace(R.id.content_frame_main, fragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 
     private class CampusLifeListAdapter extends BaseAdapter {

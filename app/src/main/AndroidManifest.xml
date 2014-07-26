@@ -33,7 +33,7 @@
         </activity>
         <activity
             android:name=".PreferencesActivity"
-            android:label="@string/aboutus"
+            android:label="@string/Preferences"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -43,6 +43,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".RemindersActivity"
+            android:label="@string/Reminders"
+            android:parentActivityName=".MainActivity"/>
+
     </application>
 
 </manifest>

@@ -117,7 +117,6 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        new RemindersFragment().floatingActionButton.setVisibility(View.INVISIBLE);
     }
 
     @Override
