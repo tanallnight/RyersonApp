@@ -2,7 +2,6 @@ package com.prototype.ryersonapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,7 +25,7 @@ public class CampusLifeFragment extends Fragment implements AdapterView.OnItemCl
             R.drawable.campuslife_icons_directory, R.drawable.campuslife_icons_bookstore};
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
         Log.d("CampusLifeFragment", "onCreateView");
         getActivity().getActionBar().setTitle("Campus Life");
         rootView = inflater.inflate(R.layout.fragment_campuslife, container, false);

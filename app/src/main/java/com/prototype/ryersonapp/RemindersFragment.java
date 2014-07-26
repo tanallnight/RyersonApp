@@ -2,7 +2,7 @@ package com.prototype.ryersonapp;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -17,7 +17,7 @@ public class RemindersFragment extends Fragment {
     public FloatingActionButton floatingActionButton;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_campuslife_reminders, container, false);
         setHasOptionsMenu(true);
         getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -65,7 +65,7 @@ public class RemindersFragment extends Fragment {
         private View rootView2;
 
         @Override
-        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
             rootView2 = inflater.inflate(R.layout.fragment_campuslife_reminders_addnewreminder, container, false);
             setHasOptionsMenu(true);
             getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);

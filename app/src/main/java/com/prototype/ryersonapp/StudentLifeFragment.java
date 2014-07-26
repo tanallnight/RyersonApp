@@ -2,7 +2,6 @@ package com.prototype.ryersonapp;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -30,7 +29,7 @@ public class StudentLifeFragment extends Fragment{
     private TextView coffee, eat, drink, shop;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_studentlife, container, false);
 
         initialize();
@@ -77,7 +76,7 @@ public class StudentLifeFragment extends Fragment{
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
 
             View rootView = inflater.inflate(R.layout.layout_studentlife_banner, container, false);
 
