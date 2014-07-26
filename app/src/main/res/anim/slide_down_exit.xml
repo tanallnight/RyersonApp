@@ -7,8 +7,5 @@
         android:toXDelta="0"
         android:fromYDelta="0"
         android:toYDelta="100%" />
-    <alpha
-        android:duration="@integer/slide_up_duration"
-        android:fromAlpha="1"
-        android:toAlpha="0" />
+
 </set>

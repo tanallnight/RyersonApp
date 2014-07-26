@@ -1,18 +1,24 @@
 package com.prototype.ryersonapp;
 
 import android.app.ProgressDialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -65,6 +71,7 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
         listView.setOnScrollListener(this);
+        listView.setTextFilterEnabled(true);
         getContacts = new GetContacts();
 
         getContacts.execute();
@@ -168,7 +175,7 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
             }
 
             if (dataFound) {
-                adapter = new eventsListAdapter();
+                adapter = new eventsListAdapter(eventList);
                 listView.setAdapter(adapter);
                 listView.setVisibility(View.VISIBLE);
                 errorText.setVisibility(View.GONE);
@@ -179,7 +186,7 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
         }
     }
 
-    public class dateComparator implements Comparator<HashMap<String, String>>{
+    public class dateComparator implements Comparator<HashMap<String, String>> {
 
         @Override
         public int compare(HashMap<String, String> stringStringHashMap, HashMap<String, String> stringStringHashMap2) {
@@ -190,9 +197,15 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
     public class eventsListAdapter extends BaseAdapter {
 
         private LayoutInflater inflater;
+        private ArrayList<HashMap<String, String>> list;
 
-        public eventsListAdapter() {
+        public eventsListAdapter(ArrayList<HashMap<String, String>> inputList) {
             inflater = LayoutInflater.from(getActivity());
+            list = inputList;
+        }
+
+        public void setArrayList(ArrayList<HashMap<String, String>> inputList){
+            list = inputList;
         }
 
         @Override
@@ -215,11 +228,11 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
             Log.d("EVENTS", "getView");
             View listLayoutView = inflater.inflate(R.layout.layout_list_events, null);
-            String title = eventList.get(i).get(TAG_NAME);
-            String description = eventList.get(i).get(TAG_DESCRIPTION);
-            String date = eventList.get(i).get(TAG_DATE);
+            String title = list.get(i).get(TAG_NAME);
+            String description = list.get(i).get(TAG_DESCRIPTION);
+            String date = list.get(i).get(TAG_DATE);
             Date d = new Date(Long.parseLong(date));
-            CharSequence dateFromatted = d.toString().subSequence(0, 10);
+            CharSequence dateFormatted = d.toString().subSequence(0, 10);
 
             TextView name = (TextView) listLayoutView.findViewById(R.id.name);
             TextView desc = (TextView) listLayoutView.findViewById(R.id.email);
@@ -227,7 +240,7 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
             name.setText(title);
             desc.setText(description);
-            orga.setText(dateFromatted);
+            orga.setText(dateFormatted);
 
             return listLayoutView;
         }

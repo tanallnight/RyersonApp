@@ -27,8 +27,8 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
 
     //private int previousFragment = 0;
     private int visibleFragment = 0;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private DrawerLayout mDrawerLayout;
+    public ActionBarDrawerToggle mDrawerToggle;
+    public DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private DrawerListAdapter mListAdapter;
     private String[] mDrawerItems = {"Campus Life", "Student Life", "Events", "Others", "Settings", "About Us"};
@@ -45,8 +45,7 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
         if (savedInstanceState == null) {
             getActionBar().setTitle(mDrawerItems[0]);
             getSupportFragmentManager().beginTransaction()
-                    // .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                    .setCustomAnimations(R.anim.slide_up_enter, R.anim.slide_up_exit)
+                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .add(R.id.content_frame_main, new CampusLifeFragment())
                     .commit();
         }
@@ -116,6 +115,12 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        new RemindersFragment().floatingActionButton.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Log.d("MainActivity", "onItemClick " + i);
         if (visibleFragment != i) {
@@ -156,9 +161,7 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
                     public void run() {
                         FragmentManager fragmentManager = getSupportFragmentManager();
                         getSupportFragmentManager().beginTransaction()
-                                //.setCustomAnimations((previousFragment < clickPosition) ? R.anim.slide_up_enter : R.anim.slide_down_enter,
-                                  //      (previousFragment < clickPosition) ? R.anim.slide_up_exit : R.anim.slide_down_exit)
-                                .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_right_exit)
+                                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                                 .replace(R.id.content_frame_main, finalFragment)
                                 .commit();
                     }

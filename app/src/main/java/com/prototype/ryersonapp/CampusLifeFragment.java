@@ -1,5 +1,6 @@
 package com.prototype.ryersonapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-public class CampusLifeFragment extends Fragment implements AdapterView.OnItemClickListener{
+public class CampusLifeFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     private View rootView;
     private ListView mListView;
@@ -26,6 +27,8 @@ public class CampusLifeFragment extends Fragment implements AdapterView.OnItemCl
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Log.d("CampusLifeFragment", "onCreateView");
+        getActivity().getActionBar().setTitle("Campus Life");
         rootView = inflater.inflate(R.layout.fragment_campuslife, container, false);
         View header = inflater.inflate(R.layout.layout_campuslife_list_header, mListView, false);
 
@@ -39,12 +42,35 @@ public class CampusLifeFragment extends Fragment implements AdapterView.OnItemCl
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(this);
 
+        MainActivity mainActivity = (MainActivity) getActivity();
+        mainActivity.mDrawerToggle.setDrawerIndicatorEnabled(true);
+
         return rootView;
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Log.d("CampusLife List", "" + i);
+
+        MainActivity mainActivity = (MainActivity) getActivity();
+        Fragment fragment = null;
+
+        switch (i) {
+            case 2:
+                fragment = new RemindersFragment();
+                break;
+            case 4:
+                fragment = new BookstoreFragment();
+                break;
+            default:
+                Log.d("CampusLife List", "" + i);
+                break;
+        }
+        mainActivity.mDrawerToggle.setDrawerIndicatorEnabled(false);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.slide_right_enter, R.anim.slide_right_exit, R.anim.slide_left_exit, R.anim.slide_left_enter)
+                .replace(R.id.content_frame_main, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     private class CampusLifeListAdapter extends BaseAdapter {
