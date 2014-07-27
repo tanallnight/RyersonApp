@@ -13,83 +13,93 @@
         android:id="@+id/reference_layout_addreminder_1">
 
         <EditText
+            android:id="@+id/edittext_newreminder_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/Title"
             android:textStyle="bold"
+            android:fontFamily="sans-serif-light"
             android:textColor="#454545"
-            android:textSize="20sp"
+            android:textSize="30sp"
             android:background="@android:color/transparent"
-            android:layout_marginBottom="25dp" />
+            android:layout_marginBottom="15dp" />
 
         <EditText
+            android:id="@+id/edittext_newreminder_description"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="250dp"
             android:textSize="20sp"
             android:gravity="top"
             android:hint="@string/Description"
             android:background="@android:color/transparent"
             android:layout_marginBottom="10dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:listDivider" />
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="80dp"
-            android:text="@string/select_date"
-            android:fontFamily="sans-serif-light"
-            android:background="@drawable/image_button_grey_selector" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:listDivider" />
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="80dp"
-            android:text="@string/select_time"
-            android:fontFamily="sans-serif-light"
-            android:background="@drawable/image_button_grey_selector" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:listDivider" />
-
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/reference_layout_addreminder_2"
-        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:gravity="bottom"
-        android:layout_marginTop="16dp"
-        android:weightSum="10">
+        android:gravity="center_vertical"
+        android:layout_above="@+id/reference_layout_addreminder_2">
+        
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_reminder"
+            android:layout_marginRight="16dp"/>
 
         <Button
-            android:layout_width="match_parent"
+            android:id="@+id/button_newreminder_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_date"
+            android:textSize="20sp"
+            android:padding="8dp"
+            android:fontFamily="sans-serif-light"
+            android:layout_marginRight="8dp"
+            android:clickable="true"
+            android:background="@drawable/image_button_grey_selector"/>
+
+        <Button
+            android:id="@+id/button_newreminder_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/select_time"
+            android:textSize="20sp"
+            android:padding="8dp"
+            android:fontFamily="sans-serif-light"
+            android:clickable="true"
+            android:background="@drawable/image_button_grey_selector"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/reference_layout_addreminder_2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/button_newreminder_cancel"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/image_button_grey_selector"
             android:text="Cancel"
-            android:layout_weight="6"
             android:textAllCaps="true"
             android:textStyle="bold"
             android:textSize="20sp"
-            android:layout_marginRight="10dp" />
+            android:padding="16dp" />
 
         <Button
-            android:layout_width="match_parent"
+            android:id="@+id/button_newreminder_add"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@drawable/image_button_grey_selector"
             android:text="Add"
-            android:layout_weight="4"
+            android:padding="16dp"
             android:textColor="@android:color/holo_blue_dark"
             android:textAllCaps="true"
             android:textStyle="bold"

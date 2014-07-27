@@ -24,7 +24,6 @@ public class RemindersActivity extends FragmentActivity {
                         .replace(R.id.content_frame_reminders, new RemindersFragments())
                         .commit();
             }
-        }, 100);
-
+        }, 50);
     }
 }

@@ -95,9 +95,9 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
     @Override
     public void onScroll(AbsListView absListView, int i, int i2, int i3) {
-        int topRowVeritcalPosition = (listView == null || listView.getChildCount() == 0) ?
+        int topRowVerticalPosition = (listView == null || listView.getChildCount() == 0) ?
                 0 : listView.getChildAt(0).getTop();
-        swipeRefreshLayout.setEnabled(topRowVeritcalPosition >= 0);
+        swipeRefreshLayout.setEnabled(topRowVerticalPosition >= 0);
     }
 
     private class GetContacts extends AsyncTask<Void, Void, Void> {

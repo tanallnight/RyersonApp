@@ -30,4 +30,7 @@ dependencies {
     compile files('libs/picasso-2.3.2.jar')
     compile 'com.viewpagerindicator:library:2.4.1@aar'
     compile 'se.emilsjolander:stickylistheaders:2.1.3'
+    compile ("com.doomonafireball.betterpickers:library:1.5.2") {
+        exclude group: 'com.android.support', module: 'support-v4'
+    }
 }

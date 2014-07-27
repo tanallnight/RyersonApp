@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.prototype.ryersonapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -22,30 +23,15 @@
         <activity
             android:name=".AboutUsActivity"
             android:label="@string/aboutus"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
-            <intent-filter>
-                <action android:name="android.intent.action.RYERSONABOUTUS" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".PreferencesActivity"
             android:label="@string/Preferences"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
-            <intent-filter>
-                <action android:name="android.intent.action.RYERSONPREFERENCES" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".RemindersActivity"
-            android:label="@string/Reminders"
             android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".RemindersActivity"
+            android:label="@string/Reminders"
+            android:parentActivityName=".MainActivity" />
 
     </application>
 

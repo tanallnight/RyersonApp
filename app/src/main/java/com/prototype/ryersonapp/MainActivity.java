@@ -143,11 +143,11 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
                     break;
                 case 4:
                     isFragment = false;
-                    startActivity(new Intent("android.intent.action.RYERSONPREFERENCES"));
+                    startActivity(new Intent(this, PreferencesActivity.class));
                     break;
                 case 5:
                     isFragment = false;
-                    startActivity(new Intent("android.intent.action.RYERSONABOUTUS"));
+                    startActivity(new Intent(this, AboutUsActivity.class));
                     break;
             }
 
