@@ -6,6 +6,13 @@
     android:padding="16dp"
     android:background="@android:color/white">
 
+    <ImageView
+        android:id="@+id/imageview_newreminder_done"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_done"
+        android:layout_centerInParent="true"/>
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -41,7 +48,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:layout_above="@+id/reference_layout_addreminder_2">
-        
+
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -100,7 +107,7 @@
             android:background="@drawable/image_button_grey_selector"
             android:text="Add"
             android:padding="16dp"
-            android:textColor="@android:color/holo_blue_dark"
+            android:textColor="#259b24"
             android:textAllCaps="true"
             android:textStyle="bold"
             android:textSize="20sp" />

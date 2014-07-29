@@ -34,11 +34,11 @@ public class ReminderDatabaseHandler extends SQLiteOpenHelper {
                 + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + KEY_TITLE + " TEXT,"
                 + KEY_DESCRIPTION + " TEXT,"
-                + KEY_DAY + " TEXT,"
-                + KEY_MONTH + " TEXT,"
-                + KEY_YEAR + " TEXT,"
-                + KEY_HOUR + " TEXT,"
-                + KEY_MINUTES + " TEXT" + ")";
+                + KEY_DAY + " INTEGER,"
+                + KEY_MONTH + " INTEGER,"
+                + KEY_YEAR + " INTEGER,"
+                + KEY_HOUR + " INTEGER,"
+                + KEY_MINUTES + " INTEGER" + ")";
 
         sqLiteDatabase.execSQL(CREATE_REMINDERS_TABLE);
     }
@@ -76,8 +76,7 @@ public class ReminderDatabaseHandler extends SQLiteOpenHelper {
                 null, null, null, null);
 
         Reminder reminder = new Reminder(Integer.parseInt(cursor.getString(0)), cursor.getString(1),
-                cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5),
-                cursor.getString(6), cursor.getString(7));
+                cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getInt(5), cursor.getInt(6), cursor.getInt(7));
 
         return reminder;
     }
@@ -95,11 +94,11 @@ public class ReminderDatabaseHandler extends SQLiteOpenHelper {
                 reminder.set_id(Integer.parseInt(cursor.getString(0)));
                 reminder.set_title(cursor.getString(1));
                 reminder.set_description(cursor.getString(2));
-                reminder.set_day(cursor.getString(3));
-                reminder.set_month(cursor.getString(4));
-                reminder.set_year(cursor.getString(5));
-                reminder.set_hour(cursor.getString(6));
-                reminder.set_minute(cursor.getString(7));
+                reminder.set_day(cursor.getInt(3));
+                reminder.set_month(cursor.getInt(4));
+                reminder.set_year(cursor.getInt(5));
+                reminder.set_hour(cursor.getInt(6));
+                reminder.set_minute(cursor.getInt(7));
 
                 reminderList.add(reminder);
             } while (cursor.moveToNext());
@@ -120,13 +119,13 @@ public class ReminderDatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_HOUR, reminder.get_hour());
         values.put(KEY_MINUTES, reminder.get_minute());
 
-        return database.update(TABLE_REMINDERS, values, KEY_ID + " = ?",
+        return database.update(TABLE_REMINDERS, values, KEY_ID + "=?",
                 new String[]{String.valueOf(reminder.get_id())});
     }
 
     public void deleteReminder(Reminder reminder) {
         SQLiteDatabase database = this.getWritableDatabase();
-        database.delete(TABLE_REMINDERS, KEY_ID + " = ?", new String[]{String.valueOf(reminder.get_id())});
+        database.delete(TABLE_REMINDERS, KEY_ID + "=?", new String[]{String.valueOf(reminder.get_id())});
         database.close();
     }
 

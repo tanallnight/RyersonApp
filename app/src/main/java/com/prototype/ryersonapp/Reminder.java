@@ -5,16 +5,16 @@ public class Reminder {
     int _id;
     String _title;
     String _description;
-    String _day;
-    String _month;
-    String _year;
-    String _hour;
-    String _minute;
+    int _day;
+    int _month;
+    int _year;
+    int _hour;
+    int _minute;
 
     public Reminder() {
     }
 
-    public Reminder(String title, String description, String day, String month, String year, String hour, String minute) {
+    public Reminder(String title, String description, int day, int month, int year, int hour, int minute) {
         _title = title;
         _description = description;
         _day = day;
@@ -24,7 +24,7 @@ public class Reminder {
         _minute = minute;
     }
 
-    public Reminder(int id, String title, String description, String day, String month, String year, String hour, String minute) {
+    public Reminder(int id, String title, String description, int day, int month, int year, int hour, int minute) {
         _id = id;
         _title = title;
         _description = description;
@@ -59,43 +59,43 @@ public class Reminder {
         this._description = _description;
     }
 
-    public String get_day() {
+    public int get_day() {
         return _day;
     }
 
-    public void set_day(String _day) {
+    public void set_day(int _day) {
         this._day = _day;
     }
 
-    public String get_month() {
+    public int get_month() {
         return _month;
     }
 
-    public void set_month(String _month) {
+    public void set_month(int _month) {
         this._month = _month;
     }
 
-    public String get_year() {
+    public int get_year() {
         return _year;
     }
 
-    public void set_year(String _year) {
+    public void set_year(int _year) {
         this._year = _year;
     }
 
-    public String get_hour() {
+    public int get_hour() {
         return _hour;
     }
 
-    public void set_hour(String _hour) {
+    public void set_hour(int _hour) {
         this._hour = _hour;
     }
 
-    public String get_minute() {
+    public int get_minute() {
         return _minute;
     }
 
-    public void set_minute(String _minute) {
+    public void set_minute(int _minute) {
         this._minute = _minute;
     }
 }

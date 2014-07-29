@@ -10,6 +10,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -23,16 +24,17 @@
         <activity
             android:name=".AboutUsActivity"
             android:label="@string/aboutus"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".PreferencesActivity"
             android:label="@string/Preferences"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".RemindersActivity"
             android:label="@string/Reminders"
             android:parentActivityName=".MainActivity" />
 
+        <receiver android:name=".RemindersReceiver" />
     </application>
 
 </manifest>

@@ -11,31 +11,38 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
 
-public class RemindersFragments extends Fragment {
+public class RemindersFragments extends Fragment implements AdapterView.OnItemClickListener {
 
     private static FloatingActionButton floatingActionButton;
     private View rootView;
     private ListView listView;
     private ReminderDatabaseHandler databaseHandler;
     private ReminderListAdapter adapter;
-    private List<Reminder> reminderList;
+    private List<Reminder> reminders;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_campuslife_reminders, container, false);
         getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
         databaseHandler = new ReminderDatabaseHandler(getActivity());
-        reminderList = databaseHandler.getAllReminders();
+        reminders = databaseHandler.getAllReminders();
 
         listView = (ListView) rootView.findViewById(R.id.listview_remiders);
         adapter = new ReminderListAdapter();
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
+
+        if(adapter.getCount() == 0){
+            listView.setVisibility(View.GONE);
+
+        }
 
         initializeFloatingActionButton();
 
@@ -63,6 +70,7 @@ public class RemindersFragments extends Fragment {
                 slideDown.setInterpolator(getActivity(), android.R.anim.anticipate_interpolator);
                 floatingActionButton.setAnimation(slideDown);
                 floatingActionButton.setVisibility(View.GONE);
+
                 getActivity().getSupportFragmentManager()
                         .beginTransaction()
                         .setCustomAnimations(R.anim.slide_up_enter, R.anim.alpha_out, R.anim.alpha_in, R.anim.slide_down_exit)
@@ -71,6 +79,26 @@ public class RemindersFragments extends Fragment {
                         .commit();
             }
         });
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+        Animation slideDown = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_down_exit);
+        slideDown.setInterpolator(getActivity(), android.R.anim.anticipate_interpolator);
+        floatingActionButton.setAnimation(slideDown);
+        floatingActionButton.setVisibility(View.GONE);
+
+        Fragment fragment = new RemindersDetailFragment(reminders, databaseHandler);
+        Bundle args = new Bundle();
+        args.putInt("KEY_CLICK_POSITION", i);
+        fragment.setArguments(args);
+
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.slide_up_enter, R.anim.alpha_out, R.anim.alpha_in, R.anim.slide_down_exit)
+                .replace(R.id.content_frame_reminders, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     private class ReminderListAdapter extends BaseAdapter {
@@ -108,56 +136,85 @@ public class RemindersFragments extends Fragment {
             TextView title = (TextView) view.findViewById(R.id.textview_reminder_list_title);
             TextView description = (TextView) view.findViewById(R.id.textview_reminder_list_description);
 
-            List<Reminder> reminders = databaseHandler.getAllReminders();
             Reminder reminder = reminders.get(i);
 
-            String mDay = reminder.get_day();
-            String mMonth = reminder.get_month();
-            String mHour = reminder.get_hour();
-            String mMinutes = reminder.get_minute();
+            int mDay = reminder.get_day();
+            int mMonth = reminder.get_month();
+            int mHour = reminder.get_hour();
+            int mMinutes = reminder.get_minute();
             String mTitle = reminder.get_title();
             String mDescription = reminder.get_description();
-            String mTime = null;
-            Log.d(mMonth, mMonth);
-            mMonth = getMonth(mMonth);
+            String mTime = getTime(mHour, mMinutes);
+            String monthText = getMonth(mMonth);
 
-            day.setText(mDay);
-            month.setText(mMonth);
+            Log.d ("TIME", mHour + "");
+
+            day.setText(mDay + "");
+            month.setText(monthText);
             time.setText(mTime);
             title.setText(mTitle);
             description.setText(mDescription);
 
             return view;
         }
+    }
 
-        private String getMonth(String inputMonth) {
-            String month = null;
-            if (inputMonth == "1")
-                month = "JAN";
-            else if (inputMonth == "2")
-                month = "FEB";
-            else if (inputMonth == "3")
-                month = "MAR";
-            else if (inputMonth == "4")
-                month = "APR";
-            else if (inputMonth == "5")
-                month = "MAY";
-            else if (inputMonth == "6")
-                month = "JUN";
-            else if (inputMonth == "7")
-                month = "JUL";
-            else if (inputMonth == "8")
-                month = "AUG";
-            else if (inputMonth == "9")
-                month = "SEP";
-            else if (inputMonth == "10")
-                month = "OCT";
-            else if (inputMonth == "11")
-                month = "NOV";
-            else if (inputMonth == "12")
-                month = "DEC";
+    public String getTime(int mHour, int mMinutes) {
+        String hour = null, minutes = null;
+        if (mHour <= 12) {
+            hour = mHour + "";
+            minutes = mMinutes + "";
+            if (mHour == 0) {
+                mHour = 12;
+                hour = mHour + "";
+            }
+            if (mMinutes < 10) {
+                minutes = "0" + mMinutes;
+            }
 
-            return month;
+            return hour + ":" + minutes + "AM";
+        } else {
+            hour = mHour + "";
+            minutes = mMinutes + "";
+            mHour = mHour - 12;
+            if (mHour < 10) {
+                hour = "0" + mHour;
+            }
+            if (mMinutes < 10) {
+                minutes = "0" + mMinutes;
+            }
+
+            return hour + ":" + minutes + "PM";
         }
+    }
+
+    public String getMonth(int inputMonth) {
+        String month = null;
+        if (inputMonth == 0)
+            month = "JAN";
+        else if (inputMonth == 1)
+            month = "FEB";
+        else if (inputMonth == 2)
+            month = "MAR";
+        else if (inputMonth == 3)
+            month = "APR";
+        else if (inputMonth == 4)
+            month = "MAY";
+        else if (inputMonth == 5)
+            month = "JUN";
+        else if (inputMonth == 6)
+            month = "JUL";
+        else if (inputMonth == 7)
+            month = "AUG";
+        else if (inputMonth == 8)
+            month = "SEP";
+        else if (inputMonth == 9)
+            month = "OCT";
+        else if (inputMonth == 10)
+            month = "NOV";
+        else if (inputMonth == 11)
+            month = "DEC";
+
+        return month;
     }
 }
