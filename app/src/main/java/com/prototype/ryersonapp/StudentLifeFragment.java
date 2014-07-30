@@ -1,5 +1,6 @@
 package com.prototype.ryersonapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,17 +28,17 @@ public class StudentLifeFragment extends Fragment{
     private ViewPager viewPager;
     private CirclePageIndicator circlePageIndicator;
     private int pos;
-    private TextView coffee, eat, drink, shop;
+    private ImageView coffee, eat, drink, shop;
 
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_studentlife, container, false);
 
-        initialize();
-
         viewPager = (ViewPager) rootView.findViewById(R.id.pager_studentlife_offers_banner);
         viewPager.setAdapter(new StudentLifeSlideAdapter(getActivity().getSupportFragmentManager()));
 
+
+        //sliding pages
         final Handler handler = new Handler();
         final Runnable runnable = new Runnable() {
             @Override
@@ -47,7 +49,6 @@ public class StudentLifeFragment extends Fragment{
                 viewPager.setCurrentItem(pos++, true);
             }
         };
-
         Timer swipeTimer = new Timer();
         swipeTimer.schedule(new TimerTask() {
             @Override
@@ -56,12 +57,23 @@ public class StudentLifeFragment extends Fragment{
             }
         }, 1, 5000);
 
+
+        coffee = (ImageView)rootView.findViewById(R.id.Coffee);
+        coffee.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(rootView.getContext(),ExploreView.class);
+                String ActivityHeader="Coffee Deals";
+                intent.putExtra("Name",ActivityHeader);
+                getActivity().startActivity(intent);
+            }
+        });
+
         return rootView;
     }
 
-    private void initialize(){
 
-    }
+    public static void SlidingPics(){}
 
     public static class StudentLifeBannerFragment extends Fragment {
 
