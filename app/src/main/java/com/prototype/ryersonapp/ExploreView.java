@@ -31,6 +31,7 @@ public class ExploreView extends Activity {
 
 
         listView.setAdapter(adapter);
+        String hi;
 
 
     }
