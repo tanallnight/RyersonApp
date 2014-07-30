@@ -1,4 +1,4 @@
-package com.prototype.ryersonapp;
+package com.prototype.ryersonapp.Reminders;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -9,13 +9,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,9 +21,9 @@ import android.widget.ImageView;
 import com.doomonafireball.betterpickers.calendardatepicker.CalendarDatePickerDialog;
 import com.doomonafireball.betterpickers.radialtimepicker.RadialPickerLayout;
 import com.doomonafireball.betterpickers.radialtimepicker.RadialTimePickerDialog;
+import com.prototype.ryersonapp.R;
 
 import java.util.Calendar;
-import java.util.List;
 
 public class ReminderAddNewFragment extends Fragment implements View.OnClickListener {
 

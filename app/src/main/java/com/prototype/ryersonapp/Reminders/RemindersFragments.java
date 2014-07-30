@@ -1,4 +1,4 @@
-package com.prototype.ryersonapp;
+package com.prototype.ryersonapp.Reminders;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,6 +15,9 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.prototype.ryersonapp.FloatingActionButton;
+import com.prototype.ryersonapp.R;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.prototype.ryersonapp;
+package com.prototype.ryersonapp.Events;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -15,13 +15,13 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-public class ServiceHandler {
+public class EventsServiceHandler {
 
     public final static int GET = 1;
     public final static int POST = 2;
     static String response = null;
 
-    public ServiceHandler() {
+    public EventsServiceHandler() {
 
     }
 

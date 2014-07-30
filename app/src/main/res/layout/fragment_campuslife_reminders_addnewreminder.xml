@@ -6,13 +6,6 @@
     android:padding="16dp"
     android:background="@android:color/white">
 
-    <ImageView
-        android:id="@+id/imageview_newreminder_done"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/ic_done"
-        android:layout_centerInParent="true"/>
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -111,8 +104,13 @@
             android:textAllCaps="true"
             android:textStyle="bold"
             android:textSize="20sp" />
-
     </LinearLayout>
 
+    <ImageView
+        android:id="@+id/imageview_newreminder_done"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_done"
+        android:layout_centerInParent="true"/>
 
 </RelativeLayout>

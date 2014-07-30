@@ -4,13 +4,6 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
-    <ImageView
-        android:id="@+id/imageview_newreminder_delete"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/ic_delete_notification"
-        android:layout_centerInParent="true"/>
-
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -48,4 +41,11 @@
             android:fontFamily="sans-serif-light" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageview_newreminder_delete"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_delete_notification"
+        android:layout_centerInParent="true"/>
 </RelativeLayout>

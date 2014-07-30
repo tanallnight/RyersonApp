@@ -1,4 +1,4 @@
-package com.prototype.ryersonapp;
+package com.prototype.ryersonapp.Reminders;
 
 import android.content.ContentValues;
 import android.content.Context;

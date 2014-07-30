@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.prototype.ryersonapp.Reminders.RemindersActivity;
 import com.squareup.picasso.Picasso;
 
 public class CampusLifeFragment extends Fragment implements AdapterView.OnItemClickListener {

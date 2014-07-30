@@ -1,4 +1,4 @@
-package com.prototype.ryersonapp;
+package com.prototype.ryersonapp.Events;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -13,6 +13,8 @@ import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.prototype.ryersonapp.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -111,8 +113,8 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
         @Override
         protected Void doInBackground(Void... voids) {
 
-            ServiceHandler sh = new ServiceHandler();
-            String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
+            EventsServiceHandler sh = new EventsServiceHandler();
+            String jsonStr = sh.makeServiceCall(url, EventsServiceHandler.GET);
             Log.d("Response: ", ">" + jsonStr);
 
             if (jsonStr != null) {
