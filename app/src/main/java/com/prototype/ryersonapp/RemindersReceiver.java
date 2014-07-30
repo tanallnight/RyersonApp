@@ -8,13 +8,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 
 public class RemindersReceiver extends BroadcastReceiver {
 
     private Bundle bundle;
     private String title, description;
-    private int id = 0;
+    private int id = 1;
+    private PendingIntent pendingIntent;
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -23,7 +25,7 @@ public class RemindersReceiver extends BroadcastReceiver {
         description = bundle.getString("KEY_DESCRIPTION");
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.drawable.ic_reminder_white)
+                .setSmallIcon(R.drawable.ic_notifications)
                 .setContentTitle(title)
                 .setContentText(description);
 
@@ -34,12 +36,19 @@ public class RemindersReceiver extends BroadcastReceiver {
             stackBuilder.addParentStack(RemindersActivity.class);
             stackBuilder.addNextIntent(resultIntent);
 
-            PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+            pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+            mBuilder.setContentIntent(pendingIntent);
+        } else {
+            pendingIntent = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             mBuilder.setContentIntent(pendingIntent);
         }
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(id, mBuilder.build());
+
+        Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        long[] pattern = {50, 50, 250, 50};
+        vibrator.vibrate(pattern, 3);
 
     }
 }
