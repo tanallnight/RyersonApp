@@ -3,13 +3,16 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:clipToPadding="false">
 
-    android:orientation="vertical" >
 
-
-<ListView
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:id="@+id/ListExploreView"></ListView>
+    <ListView
+        android:dividerHeight="0dp"
+        android:background="#00FFFFFF"
+        android:divider="@android:color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/ListExploreView" />
 
 </LinearLayout>

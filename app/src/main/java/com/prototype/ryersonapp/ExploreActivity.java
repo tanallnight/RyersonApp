@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -17,39 +19,35 @@ import android.widget.TextView;
  */
 public class ExploreActivity extends Activity {
 
+    private boolean isRotated = false;
+
     private String Title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
 
-        ListView ExploreViewListItems = (ListView)findViewById(R.id.ListExploreView);
-        ArrayAdapter<String> ExploreListAdapter = new ListAdapter(this, R.layout.activity_explore_card_epandable);
+        final ListView ExploreViewListItems = (ListView) findViewById(R.id.ListExploreView);
+        ArrayAdapter<String> ExploreListAdapter = new ListAdapter(this, R.layout.layout_list_explore);
 
-        Title= getIntent().getStringExtra("Name");
+        Title = getIntent().getStringExtra("Name");
         setTitle(Title);
 
 
-        if(Title.equals("Coffee Deals"))
-        {
+        if (Title.equals("Coffee Deals")) {
             ExploreListAdapter.add("Second Cup");
             ExploreListAdapter.add("Tim Hortons");//sending store name
 
-        }
-        else if(Title.equals("Shopping Deals"))
-        {
+        } else if (Title.equals("Shopping Deals")) {
             ExploreListAdapter.add("Shoppers Drug Mart");
-        }
-        else if(Title.equals("Eating Deals"))
-        {
+        } else if (Title.equals("Eating Deals")) {
+
+        } else if (Title.equals("Drink Deals")) {
 
         }
-        else if(Title.equals("Drink Deals"))
-        {
-
-        }
-
-
 
 
         ExploreViewListItems.setAdapter(ExploreListAdapter);
@@ -58,11 +56,28 @@ public class ExploreActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
 
                 View ExploreExpand = view.findViewById(R.id.EpandedInfo);
-
-
-                ExpandAnimation expandAni = new ExpandAnimation(ExploreExpand, 500);
+                ExpandAnimation expandAni = new ExpandAnimation(ExploreExpand, 250);
                 ExploreExpand.startAnimation(expandAni);
+
+                ImageView icon = (ImageView) view.findViewById(R.id.imageview_explore_downicon);
+                if(isRotated){
+                    RotateAnimation rotateAnimation = new RotateAnimation(180, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                    rotateAnimation.setDuration(250);
+                    rotateAnimation.setFillAfter(true);
+                    rotateAnimation.setFillEnabled(true);
+                    icon.startAnimation(rotateAnimation);
+                    isRotated = false;
+                } else {
+                    RotateAnimation rotateAnimation = new RotateAnimation(0, 180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                    rotateAnimation.setDuration(250);
+                    rotateAnimation.setFillAfter(true);
+                    rotateAnimation.setFillEnabled(true);
+                    icon.startAnimation(rotateAnimation);
+                    isRotated = true;
+                }
+
             }
+
         });
     }
 
@@ -77,36 +92,28 @@ public class ExploreActivity extends Activity {
         public View getView(int position, View convertView, ViewGroup parent) {
 
             if (convertView == null) {
-                convertView = getLayoutInflater().inflate(R.layout.activity_explore_card_epandable, null);
+                convertView = getLayoutInflater().inflate(R.layout.layout_list_explore, null);
             }
 
-            TextView StoreName = (TextView)convertView.findViewById(R.id.StoreName);
-            ImageView StoreLogo =(ImageView)convertView.findViewById(R.id.StoreLogo);
+            TextView StoreName = (TextView) convertView.findViewById(R.id.StoreName);
+            ImageView StoreLogo = (ImageView) convertView.findViewById(R.id.StoreLogo);
 
             StoreName.setText(getItem(position));//set the text
 
-            if(Title.equals("Coffee Deals"))
-            {
+            if (Title.equals("Coffee Deals")) {
 
-                if(StoreName.getText().equals("Tim Hortons"))
-                    StoreLogo.setImageResource(R.drawable.timhortons);//set the image resource
-                else if(StoreName.getText().equals("Second Cup"))
-                    StoreLogo.setImageResource(R.drawable.secondcup);
-            }
-            else if(Title.equals("Shopping Deals"))
-            {
-                if(StoreName.getText().equals("Shoppers Drug Mart"));
+                if (StoreName.getText().equals("Tim Hortons"))
+                    StoreLogo.setImageResource(R.raw.campuslife_header);//set the image resource
+                else if (StoreName.getText().equals("Second Cup"))
+                    StoreLogo.setImageResource(R.raw.campuslife_header);
+            } else if (Title.equals("Shopping Deals")) {
+                if (StoreName.getText().equals("Shoppers Drug Mart")) ;
                 StoreLogo.setImageResource(R.drawable.shopersdrugmart);
-            }
-            else if(Title.equals("Eating Deals"))
-            {
+            } else if (Title.equals("Eating Deals")) {
+
+            } else if (Title.equals("Drinking Deals")) {
 
             }
-            else if(Title.equals("Drinking Deals"))
-            {
-
-            }
-
 
 
             View toolbar = convertView.findViewById(R.id.EpandedInfo);

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/card_noround_selector"
+    android:layout_margin="8dp"
+    android:clipToPadding="false">
+
+    <!--Collapsed Info-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/StoreLogo"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@raw/campuslife_header" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_alignBottom="@id/StoreLogo">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10% Off Gourmet Meal"
+                android:fontFamily="sans-serif-light"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:typeface="sans" />
+
+            <TextView
+                android:id="@+id/StoreName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tim Hortons"
+                android:textColor="#AAFFFFFF"
+                android:textSize="17sp"
+                android:typeface="sans" />
+        </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:fontFamily="sans-serif-light"
+        android:layout_below="@id/StoreLogo"
+        android:text="Coffee - Donut"
+        android:textSize="25dp"
+        android:textColor="#666666"
+        android:typeface="sans" />
+
+     <ImageView
+         android:id="@+id/imageview_explore_downicon"
+         android:layout_width="50dp"
+         android:layout_height="50dp"
+         android:src="@drawable/ic_keyboard_arrow_down"
+         android:layout_below="@id/StoreLogo"
+         android:layout_alignRight="@id/StoreLogo"/>
+    </RelativeLayout>
+
+    <!--Shows Collapsed Information-->
+
+    <!--Expanded Info-->
+
+    <LinearLayout
+        android:id="@+id/EpandedInfo"
+        android:layout_marginBottom="-50dp"
+        android:visibility="gone"
+        android:layout_height="100dp"
+        android:layout_width="fill_parent"
+        android:orientation="vertical">
+        <!--Change LinearLayout Height depending on how many items to show-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="ITEM1\nITEM2\nITEM3\nITEM4"
+            android:id="@+id/DeaItems" />
+
+    </LinearLayout>
+</LinearLayout>
