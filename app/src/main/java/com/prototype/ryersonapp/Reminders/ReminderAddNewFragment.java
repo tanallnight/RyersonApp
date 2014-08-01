@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,7 +36,7 @@ public class ReminderAddNewFragment extends Fragment implements View.OnClickList
     private ImageView done;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_campuslife_reminders_addnewreminder, container, false);
         getActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
         getActivity().getActionBar().setHomeButtonEnabled(false);

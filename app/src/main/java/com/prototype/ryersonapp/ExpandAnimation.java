@@ -52,11 +52,15 @@ public class ExpandAnimation extends Animation {
             layoutPrams.bottomMargin = intEndPos;
             AnimationView.requestLayout();
 
-            if (blnVisible)
+            if (blnVisible==true)
             {
-                AnimationView.setVisibility(View.GONE);
+               AnimationView.setVisibility(View.GONE);
             }
             blnAnimationDone = true;
         }
+    }
+
+    public boolean isBlnVisible() {
+        return blnVisible;
     }
 }

@@ -18,22 +18,30 @@ import android.widget.TextView;
 public class ExploreActivity extends Activity {
 
     private String Title;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_explore);
 
-        ListView ExploreViewListItems = (ListView)findViewById(R.id.ListExploreView);
+        final ListView ExploreViewListItems = (ListView)findViewById(R.id.ListExploreView);
         ArrayAdapter<String> ExploreListAdapter = new ListAdapter(this, R.layout.activity_explore_card_epandable);
 
         Title= getIntent().getStringExtra("Name");
         setTitle(Title);
 
 
+
         if(Title.equals("Coffee Deals"))
         {
-            ExploreListAdapter.add("Second Cup");
             ExploreListAdapter.add("Tim Hortons");//sending store name
+            ExploreListAdapter.add("Second Cup");
+            ExploreListAdapter.add("Second Cup");
+            ExploreListAdapter.add("Second Cup");
+            ExploreListAdapter.add("Second Cup");
+            ExploreListAdapter.add("Second Cup");
+
+            ExploreListAdapter.add("STARBUCKS");
 
         }
         else if(Title.equals("Shopping Deals"))
@@ -60,11 +68,25 @@ public class ExploreActivity extends Activity {
                 View ExploreExpand = view.findViewById(R.id.EpandedInfo);
 
 
-                ExpandAnimation expandAni = new ExpandAnimation(ExploreExpand, 500);
+                ExpandAnimation expandAni = new ExpandAnimation(ExploreExpand, 300);
                 ExploreExpand.startAnimation(expandAni);
-            }
+
+                if(expandAni.isBlnVisible()) {
+                    ExploreViewListItems.smoothScrollToPositionFromTop(position, 0,150);
+                }
+                else
+                {
+                    ExploreViewListItems.smoothScrollToPositionFromTop(position, 0,150);
+
+                }
+
+          }
         });
+
     }
+
+
+
 
 
     class ListAdapter extends ArrayAdapter<String> {
@@ -82,30 +104,10 @@ public class ExploreActivity extends Activity {
 
             TextView StoreName = (TextView)convertView.findViewById(R.id.StoreName);
             ImageView StoreLogo =(ImageView)convertView.findViewById(R.id.StoreLogo);
-
             StoreName.setText(getItem(position));//set the text
+            StoreLogo.setImageResource(ResourceID(getItem(position)));//set the image resource
 
-            if(Title.equals("Coffee Deals"))
-            {
 
-                if(StoreName.getText().equals("Tim Hortons"))
-                    StoreLogo.setImageResource(R.drawable.timhortons);//set the image resource
-                else if(StoreName.getText().equals("Second Cup"))
-                    StoreLogo.setImageResource(R.drawable.secondcup);
-            }
-            else if(Title.equals("Shopping Deals"))
-            {
-                if(StoreName.getText().equals("Shoppers Drug Mart"));
-                StoreLogo.setImageResource(R.drawable.shopersdrugmart);
-            }
-            else if(Title.equals("Eating Deals"))
-            {
-
-            }
-            else if(Title.equals("Drinking Deals"))
-            {
-
-            }
 
 
 
@@ -115,5 +117,17 @@ public class ExploreActivity extends Activity {
 
             return convertView;
         }
+
+
+
+        public int ResourceID(String StoreName)
+        {
+            int ResID;
+            String n=StoreName.toLowerCase();
+            String name=n.replaceAll("\\W","");
+            ResID= getResources().getIdentifier(name,"drawable",getPackageName());
+            return ResID;
+        }
     }
+
 }
