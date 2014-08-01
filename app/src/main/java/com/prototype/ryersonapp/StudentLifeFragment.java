@@ -11,10 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -58,12 +54,45 @@ public class StudentLifeFragment extends Fragment{
         }, 1, 5000);
 
 
-        coffee = (ImageView)rootView.findViewById(R.id.Coffee);
+       coffee = (ImageView)rootView.findViewById(R.id.Coffee);
+       eat= (ImageView)rootView.findViewById(R.id.Eat);
+       drink= (ImageView)rootView.findViewById(R.id.Drinks);
+       shop= (ImageView)rootView.findViewById(R.id.Shop);
+
         coffee.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               Intent intent = new Intent(rootView.getContext(),ExploreActivity.class);
+               String ActivityHeader="Coffee Deals";
+               intent.putExtra("Name",ActivityHeader);
+               getActivity().startActivity(intent);
+           }
+       });
+
+        shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(rootView.getContext(),ExploreView.class);
-                String ActivityHeader="Coffee Deals";
+                Intent intent = new Intent(rootView.getContext(),ExploreActivity.class);
+                String ActivityHeader="Shopping Deals";
+                intent.putExtra("Name",ActivityHeader);
+                getActivity().startActivity(intent);
+            }
+        });
+
+        eat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(rootView.getContext(),ExploreActivity.class);
+                String ActivityHeader="Eating Deals";
+                intent.putExtra("Name",ActivityHeader);
+                getActivity().startActivity(intent);
+            }
+        });
+        drink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(rootView.getContext(),ExploreActivity.class);
+                String ActivityHeader="Drinking Deals";
                 intent.putExtra("Name",ActivityHeader);
                 getActivity().startActivity(intent);
             }
@@ -78,6 +107,8 @@ public class StudentLifeFragment extends Fragment{
     public static class StudentLifeBannerFragment extends Fragment {
 
         private int position;
+
+
 
         @Override
         public void onCreate(Bundle savedInstanceState) {

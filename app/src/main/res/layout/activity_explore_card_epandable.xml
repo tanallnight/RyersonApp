@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/card_noround">
+
+
+
+    <!--Collapsed Info-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/StoreLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/StoreName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/StoreLogo"
+            android:layout_alignTop="@+id/StoreLogo"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="40dp"
+            android:text="Tim Hortons"
+            android:textColor="#FFFFFF"
+            android:textSize="40dp"
+            android:typeface="sans" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Deals"
+        android:textSize="20dp"
+        android:typeface="sans" />
+
+    <!--Shows Collapsed Information-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:text="HIII"
+        android:id="@+id/CollapseInfo"/>
+
+
+    <!--Expanded Info-->
+
+    <LinearLayout android:id="@+id/EpandedInfo"
+        android:layout_marginBottom="-50dp"
+        android:visibility="gone"
+        android:layout_height="100dp"
+        android:layout_width="fill_parent"
+        android:orientation="vertical">
+        <!--Change LinearLayout Height depending on how many items to show-->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="ITEM1\nITEM2\nITEM3\nITEM4"
+            android:id="@+id/DeaItems"/>
+
+    </LinearLayout>
+</LinearLayout>

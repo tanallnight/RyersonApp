@@ -43,7 +43,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ExploreView"/>
+        <activity android:name=".ExploreActivity"/>
         <activity android:name=".Reminders.RemindersActivity"
             android:label="@string/Reminders"
             android:parentActivityName=".MainActivity"/>
