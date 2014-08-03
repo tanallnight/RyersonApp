@@ -113,7 +113,7 @@ public class CampusLifeFragment extends Fragment implements AdapterView.OnItemCl
             title.setText(listTitles[i]);
 
             ImageView image = (ImageView) view.findViewById(R.id.imageview_campuslife_list);
-            Picasso.with(getActivity()).load("https://dl.dropboxusercontent.com/u/69305400/studentuslife_icons_coffee.png").into(image);
+            Picasso.with(getActivity()).load(listImages[i]).into(image);
 
             return view;
         }

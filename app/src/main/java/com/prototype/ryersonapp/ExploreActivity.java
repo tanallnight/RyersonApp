@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -39,6 +40,8 @@ public class ExploreActivity extends Activity {
 
         if (Title.equals("Coffee Deals")) {
             ExploreListAdapter.add("Second Cup");
+            ExploreListAdapter.add("Second Cup");
+            ExploreListAdapter.add("Second Cup");
             ExploreListAdapter.add("Tim Hortons");//sending store name
 
         } else if (Title.equals("Shopping Deals")) {
@@ -59,21 +62,27 @@ public class ExploreActivity extends Activity {
                 ExpandAnimation expandAni = new ExpandAnimation(ExploreExpand, 250);
                 ExploreExpand.startAnimation(expandAni);
 
+                ExploreViewListItems.smoothScrollToPositionFromTop(position, 0, 150);
+
                 ImageView icon = (ImageView) view.findViewById(R.id.imageview_explore_downicon);
-                if(isRotated){
+
+
+                if(!isRotated){
                     RotateAnimation rotateAnimation = new RotateAnimation(180, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                     rotateAnimation.setDuration(250);
                     rotateAnimation.setFillAfter(true);
                     rotateAnimation.setFillEnabled(true);
                     icon.startAnimation(rotateAnimation);
-                    isRotated = false;
-                } else {
+                    isRotated = true;
+                }
+                else
+                {
                     RotateAnimation rotateAnimation = new RotateAnimation(0, 180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                     rotateAnimation.setDuration(250);
                     rotateAnimation.setFillAfter(true);
                     rotateAnimation.setFillEnabled(true);
                     icon.startAnimation(rotateAnimation);
-                    isRotated = true;
+                    isRotated = false;
                 }
 
             }

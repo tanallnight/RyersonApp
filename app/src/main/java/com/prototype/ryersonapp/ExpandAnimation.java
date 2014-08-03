@@ -15,6 +15,8 @@ public class ExpandAnimation extends Animation {
     private View AnimationView;
     private LayoutParams layoutPrams;
 
+
+
     private int intStartPos;
     private int intEndPos;
 
@@ -62,5 +64,9 @@ public class ExpandAnimation extends Animation {
 
     public boolean isBlnVisible() {
         return blnVisible;
+    }
+
+    public int getIntEndPos() {
+        return intEndPos;
     }
 }
