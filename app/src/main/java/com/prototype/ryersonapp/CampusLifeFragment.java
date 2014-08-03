@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.prototype.ryersonapp.Directory.DirectoryActivity;
 import com.prototype.ryersonapp.Reminders.RemindersActivity;
 import com.squareup.picasso.Picasso;
 
@@ -62,6 +63,9 @@ public class CampusLifeFragment extends Fragment implements AdapterView.OnItemCl
                 isFragment = false;
                 startActivity(new Intent(getActivity(), RemindersActivity.class));
                 break;
+            case 2:
+                isFragment = false;
+                startActivity(new Intent(getActivity(), DirectoryActivity.class));
             case 3:
                 fragment = new BookstoreFragment();
                 break;
@@ -109,7 +113,7 @@ public class CampusLifeFragment extends Fragment implements AdapterView.OnItemCl
             title.setText(listTitles[i]);
 
             ImageView image = (ImageView) view.findViewById(R.id.imageview_campuslife_list);
-            Picasso.with(getActivity()).load(listImages[i]).into(image);
+            Picasso.with(getActivity()).load("https://dl.dropboxusercontent.com/u/69305400/studentuslife_icons_coffee.png").into(image);
 
             return view;
         }

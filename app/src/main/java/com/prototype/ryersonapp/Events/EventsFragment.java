@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.prototype.ryersonapp.R;
+import com.prototype.ryersonapp.ServiceHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,7 +52,7 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private GetContacts getContacts;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_events, container, false);
 
         eventList = new ArrayList<HashMap<String, String>>();
@@ -76,7 +77,7 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
     }
 
     @Override
-    public void onActivityCreated( Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
 
@@ -113,8 +114,8 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
         @Override
         protected Void doInBackground(Void... voids) {
 
-            EventsServiceHandler sh = new EventsServiceHandler();
-            String jsonStr = sh.makeServiceCall(url, EventsServiceHandler.GET);
+            ServiceHandler sh = new ServiceHandler();
+            String jsonStr = sh.makeServiceCall(url, ServiceHandler.GET);
             Log.d("Response: ", ">" + jsonStr);
 
             if (jsonStr != null) {
@@ -199,7 +200,7 @@ public class EventsFragment extends Fragment implements SwipeRefreshLayout.OnRef
             list = inputList;
         }
 
-        public void setArrayList(ArrayList<HashMap<String, String>> inputList){
+        public void setArrayList(ArrayList<HashMap<String, String>> inputList) {
             list = inputList;
         }
 

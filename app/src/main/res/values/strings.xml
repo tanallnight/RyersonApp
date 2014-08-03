@@ -38,5 +38,6 @@
     <string name="select_time">[Select Time]</string>
     <string name="Preferences">Preferences</string>
     <string name="Reminders">Reminders</string>
+    <string name="Directory">Directory</string>
 
 </resources>

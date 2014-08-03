@@ -108,7 +108,7 @@ public class ExploreActivity extends Activity {
                     StoreLogo.setImageResource(R.raw.campuslife_header);
             } else if (Title.equals("Shopping Deals")) {
                 if (StoreName.getText().equals("Shoppers Drug Mart")) ;
-                StoreLogo.setImageResource(R.drawable.shopersdrugmart);
+                StoreLogo.setImageResource(R.drawable.shoppersdrugmart);
             } else if (Title.equals("Eating Deals")) {
 
             } else if (Title.equals("Drinking Deals")) {

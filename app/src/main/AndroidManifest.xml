@@ -34,6 +34,9 @@
             android:name=".Reminders.RemindersActivity"
             android:label="@string/Reminders"
             android:parentActivityName=".MainActivity" />
+        <activity android:name=".Directory.DirectoryActivity"
+            android:label="@string/Directory"
+            android:parentActivityName=".MainActivity"/>
 
         <receiver android:name=".Reminders.RemindersReceiver" />
     </application>
