@@ -11,6 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -22,7 +25,6 @@ public class StudentLifeFragment extends Fragment{
 
     private View rootView;
     private ViewPager viewPager;
-    private CirclePageIndicator circlePageIndicator;
     private int pos;
     private ImageView coffee, eat, drink, shop;
 
@@ -32,6 +34,9 @@ public class StudentLifeFragment extends Fragment{
 
         viewPager = (ViewPager) rootView.findViewById(R.id.pager_studentlife_offers_banner);
         viewPager.setAdapter(new StudentLifeSlideAdapter(getActivity().getSupportFragmentManager()));
+
+        CirclePageIndicator Indicator =(CirclePageIndicator)rootView.findViewById(R.id.StudentLifeIndicator);
+        Indicator.setViewPager(viewPager);
 
 
         //sliding pages
@@ -98,11 +103,14 @@ public class StudentLifeFragment extends Fragment{
             }
         });
 
+        ScrollView sc = (ScrollView)rootView.findViewById(R.id.ScollView1);
+        TextView l1 = (TextView)rootView.findViewById(R.id.l1);
+
+        l1.setText(""+sc.getScrollY()+" "+ sc.getScrollX()+"");
+
         return rootView;
     }
 
-
-    public static void SlidingPics(){}
 
     public static class StudentLifeBannerFragment extends Fragment {
 

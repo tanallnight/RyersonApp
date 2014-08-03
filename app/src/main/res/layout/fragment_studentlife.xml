@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:id="@+id/ScollView1">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/pager_studentlife_offers_banner"
@@ -17,6 +23,18 @@
             android:paddingRight="25dp"
             android:clipToPadding="false"
             android:layout_height="200dp" />
+
+        <com.viewpagerindicator.CirclePageIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/StudentLifeIndicator"
+            android:padding="10dip"
+            android:layout_gravity="center_horizontal|bottom"
+            app:pageColor="#000000"
+            app:fillColor="#feb10100"
+            app:radius="5dp"/>
+    </FrameLayout>
+
 
         <LinearLayout
             android:layout_width="fill_parent"

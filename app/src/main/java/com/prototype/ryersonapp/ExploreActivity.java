@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -39,6 +40,8 @@ public class ExploreActivity extends Activity {
 
         if (Title.equals("Coffee Deals")) {
             ExploreListAdapter.add("Second Cup");
+            ExploreListAdapter.add("Second Cup");
+            ExploreListAdapter.add("Second Cup");
             ExploreListAdapter.add("Tim Hortons");//sending store name
 
         } else if (Title.equals("Shopping Deals")) {
@@ -59,21 +62,27 @@ public class ExploreActivity extends Activity {
                 ExpandAnimation expandAni = new ExpandAnimation(ExploreExpand, 250);
                 ExploreExpand.startAnimation(expandAni);
 
+                ExploreViewListItems.smoothScrollToPositionFromTop(position, 0, 150);
+
                 ImageView icon = (ImageView) view.findViewById(R.id.imageview_explore_downicon);
-                if(isRotated){
+
+
+                if(!isRotated){
                     RotateAnimation rotateAnimation = new RotateAnimation(180, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                     rotateAnimation.setDuration(250);
                     rotateAnimation.setFillAfter(true);
                     rotateAnimation.setFillEnabled(true);
                     icon.startAnimation(rotateAnimation);
-                    isRotated = false;
-                } else {
+                    isRotated = true;
+                }
+                else
+                {
                     RotateAnimation rotateAnimation = new RotateAnimation(0, 180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                     rotateAnimation.setDuration(250);
                     rotateAnimation.setFillAfter(true);
                     rotateAnimation.setFillEnabled(true);
                     icon.startAnimation(rotateAnimation);
-                    isRotated = true;
+                    isRotated = false;
                 }
 
             }
@@ -95,25 +104,10 @@ public class ExploreActivity extends Activity {
                 convertView = getLayoutInflater().inflate(R.layout.layout_list_explore, null);
             }
 
-            TextView StoreName = (TextView) convertView.findViewById(R.id.StoreName);
-            ImageView StoreLogo = (ImageView) convertView.findViewById(R.id.StoreLogo);
-
+            TextView StoreName = (TextView)convertView.findViewById(R.id.StoreName);
+            ImageView StoreLogo =(ImageView)convertView.findViewById(R.id.StoreLogo);
             StoreName.setText(getItem(position));//set the text
-
-            if (Title.equals("Coffee Deals")) {
-
-                if (StoreName.getText().equals("Tim Hortons"))
-                    StoreLogo.setImageResource(R.raw.campuslife_header);//set the image resource
-                else if (StoreName.getText().equals("Second Cup"))
-                    StoreLogo.setImageResource(R.raw.campuslife_header);
-            } else if (Title.equals("Shopping Deals")) {
-                if (StoreName.getText().equals("Shoppers Drug Mart")) ;
-                StoreLogo.setImageResource(R.drawable.shoppersdrugmart);
-            } else if (Title.equals("Eating Deals")) {
-
-            } else if (Title.equals("Drinking Deals")) {
-
-            }
+            StoreLogo.setImageResource(ResourceID(getItem(position)));//set the image resource
 
 
             View toolbar = convertView.findViewById(R.id.EpandedInfo);
@@ -122,5 +116,15 @@ public class ExploreActivity extends Activity {
 
             return convertView;
         }
+    }
+
+
+    public int ResourceID(String StoreName)
+    {
+        int ResID;
+        String n=StoreName.toLowerCase();
+        String name=n.replaceAll("\\W","");
+        ResID= getResources().getIdentifier(name,"drawable",getPackageName());
+        return ResID;
     }
 }
