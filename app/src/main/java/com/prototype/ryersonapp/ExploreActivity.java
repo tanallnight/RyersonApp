@@ -95,25 +95,10 @@ public class ExploreActivity extends Activity {
                 convertView = getLayoutInflater().inflate(R.layout.layout_list_explore, null);
             }
 
-            TextView StoreName = (TextView) convertView.findViewById(R.id.StoreName);
-            ImageView StoreLogo = (ImageView) convertView.findViewById(R.id.StoreLogo);
-
+            TextView StoreName = (TextView)convertView.findViewById(R.id.StoreName);
+            ImageView StoreLogo =(ImageView)convertView.findViewById(R.id.StoreLogo);
             StoreName.setText(getItem(position));//set the text
-
-            if (Title.equals("Coffee Deals")) {
-
-                if (StoreName.getText().equals("Tim Hortons"))
-                    StoreLogo.setImageResource(R.raw.campuslife_header);//set the image resource
-                else if (StoreName.getText().equals("Second Cup"))
-                    StoreLogo.setImageResource(R.raw.campuslife_header);
-            } else if (Title.equals("Shopping Deals")) {
-                if (StoreName.getText().equals("Shoppers Drug Mart")) ;
-                StoreLogo.setImageResource(R.drawable.shoppersdrugmart);
-            } else if (Title.equals("Eating Deals")) {
-
-            } else if (Title.equals("Drinking Deals")) {
-
-            }
+            StoreLogo.setImageResource(ResourceID(getItem(position)));//set the image resource
 
 
             View toolbar = convertView.findViewById(R.id.EpandedInfo);
@@ -122,5 +107,15 @@ public class ExploreActivity extends Activity {
 
             return convertView;
         }
+    }
+
+
+    public int ResourceID(String StoreName)
+    {
+        int ResID;
+        String n=StoreName.toLowerCase();
+        String name=n.replaceAll("\\W","");
+        ResID= getResources().getIdentifier(name,"drawable",getPackageName());
+        return ResID;
     }
 }
