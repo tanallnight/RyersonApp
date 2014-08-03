@@ -58,6 +58,7 @@ public class CampusLifeFragment extends Fragment implements AdapterView.OnItemCl
 
         switch (i) {
             case 0:
+                fragment= new MyScheduleFragment();
                 break;
             case 1:
                 isFragment = false;
