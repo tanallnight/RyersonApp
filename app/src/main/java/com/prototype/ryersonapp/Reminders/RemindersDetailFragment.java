@@ -43,8 +43,8 @@ public class RemindersDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_campuslife_reminders_detail, container, false);
-        getActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
-        getActivity().getActionBar().setHomeButtonEnabled(false);
+        getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActivity().getActionBar().setHomeButtonEnabled(true);
         setHasOptionsMenu(true);
 
         title = (TextView) rootView.findViewById(R.id.textview_reminder_detail_title);

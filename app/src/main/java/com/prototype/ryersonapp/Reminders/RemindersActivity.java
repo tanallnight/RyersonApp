@@ -3,6 +3,7 @@ package com.prototype.ryersonapp.Reminders;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
+import android.view.MenuItem;
 
 import com.prototype.ryersonapp.R;
 
@@ -22,5 +23,19 @@ public class RemindersActivity extends FragmentActivity {
                         .commit();
             }
         }, 50);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                getSupportFragmentManager().popBackStack();
+                return true;
+            } else {
+                return super.onOptionsItemSelected(item);
+            }
+        }
+
+        return true;
     }
 }

@@ -36,10 +36,10 @@ public class ReminderAddNewFragment extends Fragment implements View.OnClickList
     private ImageView done;
 
     @Override
-    public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_campuslife_reminders_addnewreminder, container, false);
-        getActivity().getActionBar().setDisplayHomeAsUpEnabled(false);
-        getActivity().getActionBar().setHomeButtonEnabled(false);
+        getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActivity().getActionBar().setHomeButtonEnabled(true);
         initialize();
 
         done.setVisibility(View.GONE);
