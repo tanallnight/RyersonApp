@@ -9,7 +9,7 @@ import com.prototype.ryersonapp.R;
 /**
  * Created by Tanmay on 2014-08-01.
  */
-public class DirectoryActivity extends Activity{
+public class DirectoryActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 /**
  * Created by Shahar on 2014-08-02.
@@ -16,22 +15,20 @@ public class MyScheduleFragment extends Fragment {
     private View view;
 
     @Override
-    public View onCreateView(LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_myschedule, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        //view = inflater.inflate(R.layout.fragment_myschedule, container, false);
         setHasOptionsMenu(true);
 
         getActivity().setTitle("My Schedule");
         getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-
-
-        return view;
+        return null;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == android.R.id.home){
+        if (item.getItemId() == android.R.id.home) {
             getActivity().getSupportFragmentManager().popBackStack();
             return true;
         }

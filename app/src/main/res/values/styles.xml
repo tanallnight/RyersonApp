@@ -11,4 +11,9 @@
         <item name="android:background">#3f51b5</item>
         <item name="android:textSize">20dp</item>
     </style>
+
+    <style name="CustomActionBarTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 </resources>

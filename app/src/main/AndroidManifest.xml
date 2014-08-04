@@ -3,6 +3,7 @@
     package="com.prototype.ryersonapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -34,9 +35,11 @@
             android:name=".Reminders.RemindersActivity"
             android:label="@string/Reminders"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".Directory.DirectoryActivity"
+        <activity
+            android:name=".Directory.DirectoryActivity"
             android:label="@string/Directory"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden" />
 
         <receiver android:name=".Reminders.RemindersReceiver" />
     </application>
