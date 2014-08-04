@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class DirectoryResultsFragment extends Fragment {
 
     private View rootView;
     private ListView listView;
+    private LinearLayout errorView;
     private DirectoryResultsListAdapter adapter;
     private String[] names, titles, locations, extensions, emails;
 
@@ -38,9 +40,16 @@ public class DirectoryResultsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getActivity().getActionBar().setTitle("Search");
         rootView = inflater.inflate(R.layout.fragment_directory_results, container, false);
+        errorView = (LinearLayout) rootView.findViewById(R.id.layout_directory_results_error);
         listView = (ListView) rootView.findViewById(R.id.listview_directory_results);
-        adapter = new DirectoryResultsListAdapter();
-        listView.setAdapter(adapter);
+
+        if (names.length != 0) {
+            adapter = new DirectoryResultsListAdapter();
+            listView.setAdapter(adapter);
+        } else {
+            listView.setVisibility(View.GONE);
+            errorView.setVisibility(View.VISIBLE);
+        }
 
         return rootView;
     }
