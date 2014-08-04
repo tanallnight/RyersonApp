@@ -39,5 +39,6 @@
     <string name="Preferences">Preferences</string>
     <string name="Reminders">Reminders</string>
     <string name="Directory">Directory</string>
+    <string name="CampusMap">Campus Map</string>
 
 </resources>

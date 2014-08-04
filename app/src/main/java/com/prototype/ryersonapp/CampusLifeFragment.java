@@ -31,15 +31,15 @@ public class CampusLifeFragment extends Fragment implements AdapterView.OnItemCl
         Log.d("CampusLifeFragment", "onCreateView");
         getActivity().getActionBar().setTitle("Campus Life");
         rootView = inflater.inflate(R.layout.fragment_campuslife, container, false);
-        //View header = inflater.inflate(R.layout.layout_campuslife_list_header, mListView, false);
+        View header = inflater.inflate(R.layout.layout_campuslife_list_header, mListView, false);
 
         mListView = (ListView) rootView.findViewById(R.id.listview_campuslife);
         adapter = new CampusLifeListAdapter(getActivity().getLayoutInflater());
 
-        //ImageView headerImage = (ImageView) header.findViewById(R.id.imageview_campuslife_list_header);
-        //Picasso.with(getActivity()).load(R.raw.campuslife_header).into(headerImage);
+        ImageView headerImage = (ImageView) header.findViewById(R.id.imageview_campuslife_list_header);
+        Picasso.with(getActivity()).load(R.raw.campuslife_header).into(headerImage);
 
-        //mListView.addHeaderView(header);
+        mListView.addHeaderView(header);
         mListView.setAdapter(adapter);
         mListView.setOnItemClickListener(this);
 
@@ -58,16 +58,20 @@ public class CampusLifeFragment extends Fragment implements AdapterView.OnItemCl
 
         switch (i) {
             case 0:
-                fragment= new MyScheduleFragment();
+                isFragment = false;
+                startActivity(new Intent(getActivity(), CampusMapActivity.class));
                 break;
             case 1:
-                isFragment = false;
-                startActivity(new Intent(getActivity(), RemindersActivity.class));
+                fragment = new MyScheduleFragment();
                 break;
             case 2:
                 isFragment = false;
-                startActivity(new Intent(getActivity(), DirectoryActivity.class));
+                startActivity(new Intent(getActivity(), RemindersActivity.class));
+                break;
             case 3:
+                isFragment = false;
+                startActivity(new Intent(getActivity(), DirectoryActivity.class));
+            case 4:
                 fragment = new BookstoreFragment();
                 break;
         }
