@@ -5,10 +5,10 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.prototype.ryersonapp.R;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -28,6 +28,7 @@ public class SearchByKeyword extends AsyncTask<Void, Void, Void> {
     private Activity activity;
     private ProgressDialog progressDialog;
     private List<String> nameList, titleList, locationList, extensionList, emailList;
+    private List<Integer> numResults;
 
     public SearchByKeyword(String searchText, Activity activity) {
         text = searchText;
@@ -38,6 +39,7 @@ public class SearchByKeyword extends AsyncTask<Void, Void, Void> {
         locationList = new LinkedList<String>();
         extensionList = new LinkedList<String>();
         emailList = new LinkedList<String>();
+        numResults = new LinkedList<Integer>();
     }
 
     @Override
@@ -53,6 +55,7 @@ public class SearchByKeyword extends AsyncTask<Void, Void, Void> {
         locationList.clear();
         extensionList.clear();
         emailList.clear();
+        numResults.clear();
     }
 
     @Override
@@ -76,7 +79,7 @@ public class SearchByKeyword extends AsyncTask<Void, Void, Void> {
         for (int i = 0; i < results.size(); i++) {
             Element oneResult = results.get(i);
             int j = oneResult.children().size();
-            Log.d("SIZE", j + "");
+            numResults.add(j);
             if (j == 5) {
                 nameList.add(oneResult.child(0).text());
                 titleList.add(oneResult.child(1).text());
@@ -116,6 +119,7 @@ public class SearchByKeyword extends AsyncTask<Void, Void, Void> {
         String[] locationsArray = locationList.toArray(new String[0]);
         String[] extensionsArray = extensionList.toArray(new String[0]);
         String[] emailsArray = emailList.toArray(new String[0]);
+        int[] numArray = ArrayUtils.toPrimitive(numResults.toArray(new Integer[numResults.size()]));
 
         Fragment resultFragment = new DirectoryResultsFragment();
         Bundle args = new Bundle();
@@ -124,6 +128,7 @@ public class SearchByKeyword extends AsyncTask<Void, Void, Void> {
         args.putStringArray("ARRAY_LOCATION", locationsArray);
         args.putStringArray("ARRAY_EXTENSION", extensionsArray);
         args.putStringArray("ARRAY_EMAIL", emailsArray);
+        args.putIntArray("ARRAY_NUM", numArray);
         resultFragment.setArguments(args);
 
         activity.getFragmentManager().beginTransaction()
