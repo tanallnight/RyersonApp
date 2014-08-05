@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/card_noround_selector"
     android:layout_margin="8dp"
-    android:clipToPadding="false">
+    android:background="@drawable/card_noround_selector"
+    android:clipToPadding="false"
+    android:orientation="vertical">
 
     <!--Collapsed Info-->
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants">
 
         <ImageView
             android:id="@+id/StoreLogo"
@@ -21,18 +22,28 @@
             android:scaleType="centerCrop"
             android:src="@raw/campuslife_header" />
 
+        <ImageButton
+            android:id="@+id/imagebutton_explore_list_favourite"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="8dp"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_favourite_deactivated" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/StoreLogo"
             android:orientation="vertical"
-            android:padding="8dp"
-            android:layout_alignBottom="@id/StoreLogo">
+            android:padding="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10% Off Gourmet Meal"
                 android:fontFamily="sans-serif-light"
+                android:text="10% Off Gourmet Meal"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:typeface="sans" />
@@ -48,25 +59,24 @@
         </LinearLayout>
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/StoreLogo"
+            android:fontFamily="sans-serif-light"
+            android:padding="8dp"
+            android:text="Coffee - Donut"
+            android:textColor="#666666"
+            android:textSize="25dp"
+            android:typeface="sans" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:fontFamily="sans-serif-light"
-        android:layout_below="@id/StoreLogo"
-        android:text="Coffee - Donut"
-        android:textSize="25dp"
-        android:textColor="#666666"
-        android:typeface="sans" />
-
-     <ImageView
-         android:id="@+id/imageview_explore_downicon"
-         android:layout_width="50dp"
-         android:layout_height="50dp"
-         android:src="@drawable/ic_keyboard_arrow_down"
-         android:layout_below="@id/StoreLogo"
-         android:layout_alignRight="@id/StoreLogo"/>
+        <ImageView
+            android:id="@+id/imageview_explore_downicon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignRight="@id/StoreLogo"
+            android:layout_below="@id/StoreLogo"
+            android:src="@drawable/ic_keyboard_arrow_down" />
 
 
     </RelativeLayout>
@@ -76,18 +86,18 @@
 
     <LinearLayout
         android:id="@+id/EpandedInfo"
-        android:layout_marginBottom="-50dp"
-        android:visibility="gone"
-        android:layout_height="100dp"
         android:layout_width="fill_parent"
-        android:orientation="vertical">
+        android:layout_height="100dp"
+        android:layout_marginBottom="-50dp"
+        android:orientation="vertical"
+        android:visibility="gone">
         <!--Change LinearLayout Height depending on how many items to show-->
 
         <TextView
+            android:id="@+id/DeaItems"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="ITEM1\nITEM2\nITEM3\nITEM4"
-            android:id="@+id/DeaItems" />
+            android:text="ITEM1\nITEM2\nITEM3\nITEM4" />
 
     </LinearLayout>
 </LinearLayout>

@@ -23,14 +23,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.prototype.ryersonapp.Events.EventsFragment;
+import com.prototype.ryersonapp.StudentLife.StudentLifeFragment;
 
 
 public class MainActivity extends FragmentActivity implements AdapterView.OnItemClickListener {
 
-    //private int previousFragment = 0;
-    private int visibleFragment = 0;
     public ActionBarDrawerToggle mDrawerToggle;
     public DrawerLayout mDrawerLayout;
+    //private int previousFragment = 0;
+    private int visibleFragment = 0;
     private ListView mDrawerList;
     private DrawerListAdapter mListAdapter;
     private String[] mDrawerItems = {"Campus Life", "Student Life", "Events", "Others", "Settings", "About Us"};

@@ -3,16 +3,18 @@ package com.prototype.ryersonapp;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.view.animation.ScaleAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -67,16 +69,14 @@ public class ExploreActivity extends Activity {
                 ImageView icon = (ImageView) view.findViewById(R.id.imageview_explore_downicon);
 
 
-                if(!isRotated){
+                if (!isRotated) {
                     RotateAnimation rotateAnimation = new RotateAnimation(180, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                     rotateAnimation.setDuration(250);
                     rotateAnimation.setFillAfter(true);
                     rotateAnimation.setFillEnabled(true);
                     icon.startAnimation(rotateAnimation);
                     isRotated = true;
-                }
-                else
-                {
+                } else {
                     RotateAnimation rotateAnimation = new RotateAnimation(0, 180, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                     rotateAnimation.setDuration(250);
                     rotateAnimation.setFillAfter(true);
@@ -90,6 +90,13 @@ public class ExploreActivity extends Activity {
         });
     }
 
+    public int ResourceID(String StoreName) {
+        int ResID;
+        String n = StoreName.toLowerCase();
+        String name = n.replaceAll("\\W", "");
+        ResID = getResources().getIdentifier(name, "drawable", getPackageName());
+        return ResID;
+    }
 
     class ListAdapter extends ArrayAdapter<String> {
 
@@ -104,11 +111,37 @@ public class ExploreActivity extends Activity {
                 convertView = getLayoutInflater().inflate(R.layout.layout_list_explore, null);
             }
 
-            TextView StoreName = (TextView)convertView.findViewById(R.id.StoreName);
-            ImageView StoreLogo =(ImageView)convertView.findViewById(R.id.StoreLogo);
+            TextView StoreName = (TextView) convertView.findViewById(R.id.StoreName);
+            ImageView StoreLogo = (ImageView) convertView.findViewById(R.id.StoreLogo);
             StoreName.setText(getItem(position));//set the text
-            StoreLogo.setImageResource(ResourceID(getItem(position)));//set the image resource
+            //StoreLogo.setImageResource(ResourceID(getItem(position)));//set the image resource
+            StoreLogo.setImageResource(R.raw.campuslife_header);
 
+            final ImageButton fav = (ImageButton) convertView.findViewById(R.id.imagebutton_explore_list_favourite);
+            fav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ScaleAnimation scaleDown =
+                            new ScaleAnimation(1, 0, 1, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                    scaleDown.setFillAfter(true);
+                    scaleDown.setFillEnabled(true);
+                    scaleDown.setDuration(150l);
+                    fav.startAnimation(scaleDown);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            ScaleAnimation scaleUp =
+                                    new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                            scaleUp.setFillAfter(true);
+                            scaleUp.setFillEnabled(true);
+                            scaleUp.setDuration(150l);
+                            fav.startAnimation(scaleUp);
+                            fav.setImageResource(R.drawable.ic_favourite_activated);
+                        }
+                    }, 150);
+                }
+            });
 
             View toolbar = convertView.findViewById(R.id.EpandedInfo);
             ((LinearLayout.LayoutParams) toolbar.getLayoutParams()).bottomMargin = -50;
@@ -116,15 +149,5 @@ public class ExploreActivity extends Activity {
 
             return convertView;
         }
-    }
-
-
-    public int ResourceID(String StoreName)
-    {
-        int ResID;
-        String n=StoreName.toLowerCase();
-        String name=n.replaceAll("\\W","");
-        ResID= getResources().getIdentifier(name,"drawable",getPackageName());
-        return ResID;
     }
 }

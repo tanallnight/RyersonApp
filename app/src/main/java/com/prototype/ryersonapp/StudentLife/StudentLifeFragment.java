@@ -1,4 +1,4 @@
-package com.prototype.ryersonapp;
+package com.prototype.ryersonapp.StudentLife;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,12 +16,14 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.prototype.ryersonapp.ExploreActivity;
+import com.prototype.ryersonapp.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class StudentLifeFragment extends Fragment{
+public class StudentLifeFragment extends Fragment {
 
     private View rootView;
     private ViewPager viewPager;
@@ -32,7 +34,7 @@ public class StudentLifeFragment extends Fragment{
     private ImageView coffee, eat, drink, shop;
 
     @Override
-    public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_studentlife, container, false);
         swipeTimer = new Timer();
         viewPager = (ViewPager) rootView.findViewById(R.id.pager_studentlife_offers_banner);
@@ -71,27 +73,27 @@ public class StudentLifeFragment extends Fragment{
             }
         }, 1, 5000);
 
-       coffee = (ImageView)rootView.findViewById(R.id.Coffee);
-       eat= (ImageView)rootView.findViewById(R.id.Eat);
-       drink= (ImageView)rootView.findViewById(R.id.Drinks);
-       shop= (ImageView)rootView.findViewById(R.id.Shop);
+        coffee = (ImageView) rootView.findViewById(R.id.Coffee);
+        eat = (ImageView) rootView.findViewById(R.id.Eat);
+        drink = (ImageView) rootView.findViewById(R.id.Drinks);
+        shop = (ImageView) rootView.findViewById(R.id.Shop);
 
         coffee.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               Intent intent = new Intent(rootView.getContext(),ExploreActivity.class);
-               String ActivityHeader="Coffee Deals";
-               intent.putExtra("Name",ActivityHeader);
-               getActivity().startActivity(intent);
-           }
-       });
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(rootView.getContext(), ExploreActivity.class);
+                String ActivityHeader = "Coffee Deals";
+                intent.putExtra("Name", ActivityHeader);
+                getActivity().startActivity(intent);
+            }
+        });
 
         shop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(rootView.getContext(),ExploreActivity.class);
-                String ActivityHeader="Shopping Deals";
-                intent.putExtra("Name",ActivityHeader);
+                Intent intent = new Intent(rootView.getContext(), ExploreActivity.class);
+                String ActivityHeader = "Shopping Deals";
+                intent.putExtra("Name", ActivityHeader);
                 getActivity().startActivity(intent);
             }
         });
@@ -99,26 +101,26 @@ public class StudentLifeFragment extends Fragment{
         eat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(rootView.getContext(),ExploreActivity.class);
-                String ActivityHeader="Eating Deals";
-                intent.putExtra("Name",ActivityHeader);
+                Intent intent = new Intent(rootView.getContext(), ExploreActivity.class);
+                String ActivityHeader = "Eating Deals";
+                intent.putExtra("Name", ActivityHeader);
                 getActivity().startActivity(intent);
             }
         });
         drink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(rootView.getContext(),ExploreActivity.class);
-                String ActivityHeader="Drinking Deals";
-                intent.putExtra("Name",ActivityHeader);
+                Intent intent = new Intent(rootView.getContext(), ExploreActivity.class);
+                String ActivityHeader = "Drinking Deals";
+                intent.putExtra("Name", ActivityHeader);
                 getActivity().startActivity(intent);
             }
         });
 
-        ScrollView sc = (ScrollView)rootView.findViewById(R.id.ScollView1);
-        TextView l1 = (TextView)rootView.findViewById(R.id.l1);
+        ScrollView sc = (ScrollView) rootView.findViewById(R.id.ScollView1);
+        TextView l1 = (TextView) rootView.findViewById(R.id.l1);
 
-        l1.setText(""+sc.getScrollY()+" "+ sc.getScrollX()+"");
+        l1.setText("" + sc.getScrollY() + " " + sc.getScrollX() + "");
 
         return rootView;
     }
@@ -140,7 +142,7 @@ public class StudentLifeFragment extends Fragment{
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,  Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
             View rootView = inflater.inflate(R.layout.layout_studentlife_banner, container, false);
 
