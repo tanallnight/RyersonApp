@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ScollView1"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:id="@+id/ScollView1">
+    android:layout_height="fill_parent">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -18,22 +18,12 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/pager_studentlife_offers_banner"
             android:layout_width="match_parent"
-            android:paddingLeft="8dp"
-            android:paddingTop="8dp"
-            android:paddingRight="25dp"
+            android:layout_height="200dp"
             android:clipToPadding="false"
-            android:layout_height="200dp" />
-
-        <com.viewpagerindicator.CirclePageIndicator
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/StudentLifeIndicator"
-            android:padding="10dip"
-            android:layout_gravity="center_horizontal|bottom"
-            app:pageColor="#000000"
-            app:fillColor="#feb10100"
-            app:radius="5dp"/>
-    </FrameLayout>
+            android:paddingLeft="8dp"
+            android:paddingRight="25dp"
+            android:paddingTop="8dp" />
+        </FrameLayout>
 
 
         <LinearLayout
@@ -53,8 +43,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/Explore"
                     android:fontFamily="sans-serif-light"
+                    android:text="@string/Explore"
                     android:textColor="#454545"
                     android:textSize="30sp" />
 
@@ -73,84 +63,58 @@
                     android:weightSum="4">
 
                     <ImageView
+                        android:id="@+id/Coffee"
                         android:layout_width="@dimen/studentlife_explore_icons_size"
                         android:layout_height="@dimen/studentlife_explore_icons_size"
-                        android:src="@drawable/studentuslife_icons_coffee"
-                        android:scaleType="centerInside"
                         android:layout_margin="@dimen/studentlife_explore_icons_margin"
                         android:layout_weight="1"
                         android:clickable="true"
-                        android:id="@+id/Coffee"/>
+                        android:scaleType="centerInside"
+                        android:src="@drawable/studentuslife_icons_coffee" />
 
                     <ImageView
+                        android:id="@+id/Eat"
                         android:layout_width="@dimen/studentlife_explore_icons_size"
                         android:layout_height="@dimen/studentlife_explore_icons_size"
-                        android:src="@drawable/studentuslife_icons_eat"
-                        android:scaleType="centerInside"
-                        android:layout_weight="1"
                         android:layout_margin="@dimen/studentlife_explore_icons_margin"
+                        android:layout_weight="1"
                         android:clickable="true"
-                        android:id="@+id/Eat"/>
+                        android:scaleType="centerInside"
+                        android:src="@drawable/studentuslife_icons_eat" />
 
                     <ImageView
+                        android:id="@+id/Drinks"
                         android:layout_width="@dimen/studentlife_explore_icons_size"
                         android:layout_height="@dimen/studentlife_explore_icons_size"
-                        android:src="@drawable/studentuslife_icons_drink"
-                        android:scaleType="centerInside"
-                        android:layout_weight="1"
                         android:layout_margin="@dimen/studentlife_explore_icons_margin"
+                        android:layout_weight="1"
                         android:clickable="true"
-                        android:id="@+id/Drinks"/>
+                        android:scaleType="centerInside"
+                        android:src="@drawable/studentuslife_icons_drink" />
 
                     <ImageView
+                        android:id="@+id/Shop"
                         android:layout_width="@dimen/studentlife_explore_icons_size"
                         android:layout_height="@dimen/studentlife_explore_icons_size"
-                        android:src="@drawable/studentuslife_icons_shop"
-                        android:scaleType="centerInside"
-                        android:layout_weight="1"
                         android:layout_margin="@dimen/studentlife_explore_icons_margin"
+                        android:layout_weight="1"
                         android:clickable="true"
-                        android:id="@+id/Shop"/>
+                        android:scaleType="centerInside"
+                        android:src="@drawable/studentuslife_icons_shop" />
 
 
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="fill_parent"
+            <fragment
+                android:id="@+id/fragment_studentlife_favourites"
+                class="com.prototype.ryersonapp.StudentlifeFavouritesFragment"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:background="@drawable/card_round"
-                android:baselineAligned="false"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Favourites"
-                    android:fontFamily="sans-serif-light"
-                    android:textColor="#454545"
-                    android:textSize="30sp" />
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginTop="16dp"
-                    android:background="?android:attr/listDivider" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="@string/nothing_here"
-                    android:textColor="#888888"
-                    android:layout_marginBottom="100dp"
-                    android:id="@+id/l1"/>
-            </LinearLayout>
+                tools:layout="@layout/fragment_studentlife_favourites" />
         </LinearLayout>
 
     </LinearLayout>

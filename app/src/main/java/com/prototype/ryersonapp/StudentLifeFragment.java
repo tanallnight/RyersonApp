@@ -7,16 +7,16 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
-import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -25,19 +25,19 @@ public class StudentLifeFragment extends Fragment{
 
     private View rootView;
     private ViewPager viewPager;
+    private ScrollView scrollView;
+    private Timer swipeTimer;
     private int pos;
+    private boolean sScroll;
     private ImageView coffee, eat, drink, shop;
 
     @Override
     public View onCreateView(LayoutInflater inflater,  ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_studentlife, container, false);
-
+        swipeTimer = new Timer();
         viewPager = (ViewPager) rootView.findViewById(R.id.pager_studentlife_offers_banner);
+        scrollView = (ScrollView) rootView.findViewById(R.id.ScollView1);
         viewPager.setAdapter(new StudentLifeSlideAdapter(getActivity().getSupportFragmentManager()));
-
-        CirclePageIndicator Indicator =(CirclePageIndicator)rootView.findViewById(R.id.StudentLifeIndicator);
-        Indicator.setViewPager(viewPager);
-
 
         //sliding pages
         final Handler handler = new Handler();
@@ -50,14 +50,26 @@ public class StudentLifeFragment extends Fragment{
                 viewPager.setCurrentItem(pos++, true);
             }
         };
-        Timer swipeTimer = new Timer();
         swipeTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                handler.post(runnable);
+                scrollView.getViewTreeObserver().addOnScrollChangedListener(new ViewTreeObserver.OnScrollChangedListener() {
+                    @Override
+                    public void onScrollChanged() {
+                        int scrollY = scrollView.getScrollY();
+                        if (scrollY >= 360) {
+                            shouldScroll(false);
+                        } else {
+                            shouldScroll(true);
+                        }
+                        Log.d("SCROLL", "" + scrollY);
+                    }
+                });
+                if (sScroll) {
+                    handler.post(runnable);
+                }
             }
         }, 1, 5000);
-
 
        coffee = (ImageView)rootView.findViewById(R.id.Coffee);
        eat= (ImageView)rootView.findViewById(R.id.Eat);
@@ -111,12 +123,13 @@ public class StudentLifeFragment extends Fragment{
         return rootView;
     }
 
+    private void shouldScroll(boolean scroll) {
+        sScroll = scroll;
+    }
 
     public static class StudentLifeBannerFragment extends Fragment {
 
         private int position;
-
-
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
