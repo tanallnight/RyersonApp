@@ -8,7 +8,7 @@
         android:showAsAction="always"/>-->
     <item
         android:id="@+id/action_reminders_delete"
-        android:title="Edit"
         android:icon="@drawable/ic_action_delete"
-        android:showAsAction="always"/>
+        android:showAsAction="always"
+        android:title="Delete" />
 </menu>

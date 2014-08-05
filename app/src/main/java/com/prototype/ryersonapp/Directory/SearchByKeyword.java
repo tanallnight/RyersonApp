@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.prototype.ryersonapp.R;
 
@@ -74,18 +75,38 @@ public class SearchByKeyword extends AsyncTask<Void, Void, Void> {
         int x = results.size();
         for (int i = 0; i < results.size(); i++) {
             Element oneResult = results.get(i);
-            int j = 0;
-            while (j < 5) {
-                nameList.add(oneResult.child(j).text());
-                j++;
-                titleList.add(oneResult.child(j).text());
-                j++;
-                locationList.add(oneResult.child(j).text());
-                j++;
-                extensionList.add(oneResult.child(j).text());
-                j++;
-                emailList.add(oneResult.child(j).text());
-                j++;
+            int j = oneResult.children().size();
+            Log.d("SIZE", j + "");
+            if (j == 5) {
+                nameList.add(oneResult.child(0).text());
+                titleList.add(oneResult.child(1).text());
+                locationList.add(oneResult.child(2).text());
+                extensionList.add(oneResult.child(3).text());
+                emailList.add(oneResult.child(4).text());
+            } else if (j == 4) {
+                nameList.add(oneResult.child(0).text());
+                titleList.add("");
+                locationList.add(oneResult.child(1).text());
+                extensionList.add(oneResult.child(2).text());
+                emailList.add(oneResult.child(3).text());
+            } else if (j == 3) {
+                nameList.add(oneResult.child(0).text());
+                titleList.add("");
+                locationList.add("");
+                extensionList.add(oneResult.child(1).text());
+                emailList.add(oneResult.child(2).text());
+            } else if (j == 2) {
+                nameList.add(oneResult.child(0).text());
+                titleList.add("");
+                locationList.add("");
+                extensionList.add("");
+                emailList.add(oneResult.child(1).text());
+            } else if (j == 1) {
+                nameList.add(oneResult.child(0).text());
+                titleList.add("");
+                locationList.add("");
+                extensionList.add("");
+                emailList.add("");
             }
         }
         progressDialog.dismiss();

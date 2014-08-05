@@ -27,11 +27,8 @@ public class DirectoryActivity extends Activity {
             if (getFragmentManager().getBackStackEntryCount() > 0) {
                 getFragmentManager().popBackStack();
                 return true;
-            } else {
-                return super.onOptionsItemSelected(item);
             }
         }
-
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 }

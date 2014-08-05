@@ -31,11 +31,8 @@ public class RemindersActivity extends FragmentActivity {
             if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
                 getSupportFragmentManager().popBackStack();
                 return true;
-            } else {
-                return super.onOptionsItemSelected(item);
             }
         }
-
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 }
