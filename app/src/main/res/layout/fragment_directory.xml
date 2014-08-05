@@ -27,7 +27,7 @@
                 android:layout_gravity="center_horizontal"
                 android:descendantFocusability="beforeDescendants"
                 android:fontFamily="sans-serif-light"
-                android:text="SEARCH BY KEYWORD"
+                android:text="SEARCH BY NAME"
                 android:textColor="#5677fc"
                 android:textSize="20sp" />
 
@@ -37,7 +37,9 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/card_noround"
-                android:hint="Search"
+                android:hint="Enter First or Last Name"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:textSize="15sp" />
