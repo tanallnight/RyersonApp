@@ -34,7 +34,7 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
     private int visibleFragment = 0;
     private ListView mDrawerList;
     private DrawerListAdapter mListAdapter;
-    private String[] mDrawerItems = {"Campus Life", "Student Life", "Events", "Others", "Settings", "About Us"};
+    private String[] mDrawerItems = {"Campus Life", "Student Life", "Events", "Settings", "About Us", "FeedBack"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,13 +144,22 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
                     fragment = new EventsFragment();
                     setVisibleFragment(i);
                     break;
-                case 4:
+                case 3:
                     isFragment = false;
                     startActivity(new Intent(this, PreferencesActivity.class));
                     break;
-                case 5:
+                case 4:
                     isFragment = false;
                     startActivity(new Intent(this, AboutUsActivity.class));
+                    break;
+                case 5:
+                    isFragment = false;
+                    String[] emailAddress = {"tanpar1995@gmail.com"};
+                    Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                    emailIntent.putExtra(Intent.EXTRA_EMAIL, emailAddress);
+                    emailIntent.setType("plain/text");
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback RyersonApp");
+                    startActivity(emailIntent);
                     break;
             }
 
@@ -182,7 +191,7 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
 
         private LayoutInflater inflater;
         private int mSelectedItem;
-        private int[] mDrawerDrawables = {R.drawable.ic_settings, R.drawable.ic_about};
+        private int[] mDrawerDrawables = {R.drawable.ic_settings, R.drawable.ic_about, R.drawable.ic_feedback};
 
         public DrawerListAdapter(LayoutInflater inflater) {
             this.inflater = inflater;
@@ -214,7 +223,7 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
 
-            if (position <= 3) {
+            if (position <= 2) {
                 convertView = inflater.inflate(R.layout.layout_drawer_primary, null);
                 TextView titlePrimary = (TextView) convertView.findViewById(R.id.textView_drawer_list_primary);
                 titlePrimary.setText(mDrawerItems[position]);
@@ -227,7 +236,7 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
                 titleSecondary.setText(mDrawerItems[position]);
 
                 ImageView imageView = (ImageView) convertView.findViewById(R.id.imageView_drawer_list_secondary);
-                imageView.setImageResource(mDrawerDrawables[position - 4]);
+                imageView.setImageResource(mDrawerDrawables[position - 3]);
                 return convertView;
             }
 

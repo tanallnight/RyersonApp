@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import com.prototype.ryersonapp.ExploreActivity;
 import com.prototype.ryersonapp.R;
@@ -116,11 +115,6 @@ public class StudentLifeFragment extends Fragment {
                 getActivity().startActivity(intent);
             }
         });
-
-        ScrollView sc = (ScrollView) rootView.findViewById(R.id.ScollView1);
-        TextView l1 = (TextView) rootView.findViewById(R.id.l1);
-
-        l1.setText("" + sc.getScrollY() + " " + sc.getScrollX() + "");
 
         return rootView;
     }
