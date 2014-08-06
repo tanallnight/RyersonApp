@@ -5,16 +5,20 @@ import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.viewpagerindicator.TabPageIndicator;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Vector;
 
@@ -22,45 +26,49 @@ import java.util.Vector;
  * Created by Shahar on 2014-08-05.
  */
 public class MyScheduleActivity extends FragmentActivity implements ActionBar.TabListener {
-    protected ViewPager viewPager;
+    private ViewPager viewPager;
     private DatePickerAdapter mAdapter;
     private ActionBar actionBar;
 
-   protected int CurrentItem;
-
    private static FloatingActionButton floatingActionButton;
-
-
-
+   public static Calendar[] ClickedDate;
 
 
     // Tab titles
-    private String[] tabs;
+    private String[] tabsDates;
+    public static int p;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_myschedule);
 
-        tabs=new String[howLong(Calendar.getInstance())+1];
+
+
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
+        tabsDates=new String[howLong(Calendar.getInstance())+1];
+        ClickedDate= new Calendar[howLong(Calendar.getInstance())+2];
         actionBar = getActionBar();
-        mAdapter = new DatePickerAdapter(getSupportFragmentManager());
+
         int x=0;
-        for(int p=0; p<howLong(Calendar.getInstance())+1;p++)
+        for(int q=0; q<howLong(Calendar.getInstance())+1;q++)
         {
-            tabs[p]=(shiftDate(Calendar.getInstance(),x));
+            tabsDates[q]=(shiftDate(Calendar.getInstance(),x));
+            ClickedDate[q]=(shiftedCalender(Calendar.getInstance(), x));
             x++;
         }
 
-
+        mAdapter = new DatePickerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(mAdapter);
         actionBar.setHomeButtonEnabled(false);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // Adding Tabs
-        for (String tab_name : tabs) {
+        for (String tab_name : tabsDates) {
             actionBar.addTab(actionBar.newTab().setText(tab_name)
                     .setTabListener(this));
         }
@@ -78,6 +86,8 @@ public class MyScheduleActivity extends FragmentActivity implements ActionBar.Ta
                 // on changing the page
                 // make respected tab selected
                 actionBar.setSelectedNavigationItem(position);
+                p=position;
+
             }
 
             @Override
@@ -89,10 +99,11 @@ public class MyScheduleActivity extends FragmentActivity implements ActionBar.Ta
             }
         });
 
-        CurrentItem=viewPager.getCurrentItem();
+
 
         initializeFloatingActionButton();
     }
+
 
 
     private void initializeFloatingActionButton() {
@@ -102,15 +113,23 @@ public class MyScheduleActivity extends FragmentActivity implements ActionBar.Ta
                 .withGravity(Gravity.BOTTOM | Gravity.RIGHT)
                 .withMargins(0, 0, 16, 16)
                 .create();
+
+
+
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                viewPager.setCurrentItem(0);
+                ClickedDate[ClickedDate.length-1]= Calendar.getInstance();
+                p=ClickedDate.length-1;
             }
 
         });
 
     }
+
+
+
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
     }
@@ -120,6 +139,8 @@ public class MyScheduleActivity extends FragmentActivity implements ActionBar.Ta
         // on tab selected
         // show respected fragment view
         viewPager.setCurrentItem(tab.getPosition());
+        p=tab.getPosition();
+
     }
 
     @Override
@@ -133,6 +154,14 @@ public class MyScheduleActivity extends FragmentActivity implements ActionBar.Ta
       //  String [] date = new String[]{new SimpleDateFormat("EEEE").format(calendar.getTime()),new SimpleDateFormat("MMMM").format(calendar.getTime()),new SimpleDateFormat("yyyy").format(calendar.getTime())};
         return (new SimpleDateFormat("EEEE").format(calendar.getTime()));
     }
+    public Calendar shiftedCalender(Calendar c, int Shift)
+    {
+        Calendar calendar=c;
+        calendar.add(Calendar.DAY_OF_MONTH,Shift);
+        return calendar;
+    }
+
+
     public String shiftMonth(Calendar c, int Shift)
     {
         Calendar calendar=c;
@@ -155,8 +184,12 @@ public class MyScheduleActivity extends FragmentActivity implements ActionBar.Ta
         return max;
     }
 
-    public int getCurrentItem() {
-        return CurrentItem;
+    public static Calendar[] getClickedDate() {
+        return ClickedDate;
+    }
+
+    public static int getP() {
+        return p;
     }
 }
 
