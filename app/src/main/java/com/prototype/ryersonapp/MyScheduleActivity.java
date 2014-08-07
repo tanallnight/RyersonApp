@@ -1,64 +1,55 @@
 package com.prototype.ryersonapp;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.CalendarContract;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.TextView;
-
-import com.viewpagerindicator.TabPageIndicator;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.Vector;
 
 /**
  * Created by Shahar on 2014-08-05.
  */
 public class MyScheduleActivity extends FragmentActivity implements ActionBar.TabListener {
+    public static Calendar[] ClickedDate;
+    public static int p;
+    private static FloatingActionButton floatingActionButton;
     private ViewPager viewPager;
     private DatePickerAdapter mAdapter;
     private ActionBar actionBar;
-
-   private static FloatingActionButton floatingActionButton;
-   public static Calendar[] ClickedDate;
-
-
     // Tab titles
     private String[] tabsDates;
-    public static int p;
 
+    public static Calendar[] getClickedDate() {
+        return ClickedDate;
+    }
 
-
+    public static int getP() {
+        return p;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_myschedule);
-
+        setContentView(R.layout.activity_myschedule);
 
 
         // Initilization
         viewPager = (ViewPager) findViewById(R.id.pager);
-        tabsDates=new String[howLong(Calendar.getInstance())+1];
-        ClickedDate= new Calendar[howLong(Calendar.getInstance())+2];
+        tabsDates = new String[howLong(Calendar.getInstance()) + 1];
+        ClickedDate = new Calendar[howLong(Calendar.getInstance()) + 2];
         actionBar = getActionBar();
 
-        int x=0;
-        for(int q=0; q<howLong(Calendar.getInstance())+1;q++)
-        {
-            tabsDates[q]=(shiftDate(Calendar.getInstance(),x));
-            ClickedDate[q]=(shiftedCalender(Calendar.getInstance(), x));
+        int x = 0;
+        for (int q = 0; q < howLong(Calendar.getInstance()) + 1; q++) {
+            tabsDates[q] = (shiftDate(Calendar.getInstance(), x));
+            ClickedDate[q] = (shiftedCalender(Calendar.getInstance(), x));
             x++;
         }
 
@@ -74,8 +65,6 @@ public class MyScheduleActivity extends FragmentActivity implements ActionBar.Ta
         }
 
 
-
-
         /**
          * on swiping the viewpager make respective tab selected
          * */
@@ -86,7 +75,7 @@ public class MyScheduleActivity extends FragmentActivity implements ActionBar.Ta
                 // on changing the page
                 // make respected tab selected
                 actionBar.setSelectedNavigationItem(position);
-                p=position;
+                p = position;
 
             }
 
@@ -100,11 +89,8 @@ public class MyScheduleActivity extends FragmentActivity implements ActionBar.Ta
         });
 
 
-
         initializeFloatingActionButton();
     }
-
-
 
     private void initializeFloatingActionButton() {
         floatingActionButton = new FloatingActionButton.Builder(this)
@@ -115,20 +101,17 @@ public class MyScheduleActivity extends FragmentActivity implements ActionBar.Ta
                 .create();
 
 
-
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               viewPager.setCurrentItem(0);
-                ClickedDate[ClickedDate.length-1]= Calendar.getInstance();
-                p=ClickedDate.length-1;
+                viewPager.setCurrentItem(0);
+                ClickedDate[ClickedDate.length - 1] = Calendar.getInstance();
+                p = ClickedDate.length - 1;
             }
 
         });
 
     }
-
-
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
@@ -139,7 +122,7 @@ public class MyScheduleActivity extends FragmentActivity implements ActionBar.Ta
         // on tab selected
         // show respected fragment view
         viewPager.setCurrentItem(tab.getPosition());
-        p=tab.getPosition();
+        p = tab.getPosition();
 
     }
 
@@ -147,49 +130,37 @@ public class MyScheduleActivity extends FragmentActivity implements ActionBar.Ta
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
     }
 
-    public String shiftDate(Calendar c, int Shift)
-    {
-        Calendar calendar=c;
-        calendar.add(Calendar.DAY_OF_MONTH,Shift);
-      //  String [] date = new String[]{new SimpleDateFormat("EEEE").format(calendar.getTime()),new SimpleDateFormat("MMMM").format(calendar.getTime()),new SimpleDateFormat("yyyy").format(calendar.getTime())};
+    public String shiftDate(Calendar c, int Shift) {
+        Calendar calendar = c;
+        calendar.add(Calendar.DAY_OF_MONTH, Shift);
+        //  String [] date = new String[]{new SimpleDateFormat("EEEE").format(calendar.getTime()),new SimpleDateFormat("MMMM").format(calendar.getTime()),new SimpleDateFormat("yyyy").format(calendar.getTime())};
         return (new SimpleDateFormat("EEEE").format(calendar.getTime()));
     }
-    public Calendar shiftedCalender(Calendar c, int Shift)
-    {
-        Calendar calendar=c;
-        calendar.add(Calendar.DAY_OF_MONTH,Shift);
+
+    public Calendar shiftedCalender(Calendar c, int Shift) {
+        Calendar calendar = c;
+        calendar.add(Calendar.DAY_OF_MONTH, Shift);
         return calendar;
     }
 
-
-    public String shiftMonth(Calendar c, int Shift)
-    {
-        Calendar calendar=c;
-        calendar.add(Calendar.MONTH,Shift);
+    public String shiftMonth(Calendar c, int Shift) {
+        Calendar calendar = c;
+        calendar.add(Calendar.MONTH, Shift);
         //  String [] date = new String[]{new SimpleDateFormat("EEEE").format(calendar.getTime()),new SimpleDateFormat("MMMM").format(calendar.getTime()),new SimpleDateFormat("yyyy").format(calendar.getTime())};
         return (new SimpleDateFormat("MMMM").format(calendar.getTime()));
     }
 
-    public int howLong(Calendar c)
-    {
-        int max=0;
-        Calendar calendar=c;
+    public int howLong(Calendar c) {
+        int max = 0;
+        Calendar calendar = c;
         int year = calendar.get(Calendar.YEAR);
-        int month= calendar.get(Calendar.MONTH);
-        Calendar myCal= new GregorianCalendar(year,month,1);
+        int month = calendar.get(Calendar.MONTH);
+        Calendar myCal = new GregorianCalendar(year, month, 1);
         int daysInMonth = myCal.getActualMaximum(Calendar.DAY_OF_MONTH);
-        int currDay= calendar.get(Calendar.DAY_OF_MONTH);
-        max=(daysInMonth-currDay);
+        int currDay = calendar.get(Calendar.DAY_OF_MONTH);
+        max = (daysInMonth - currDay);
 
         return max;
-    }
-
-    public static Calendar[] getClickedDate() {
-        return ClickedDate;
-    }
-
-    public static int getP() {
-        return p;
     }
 }
 

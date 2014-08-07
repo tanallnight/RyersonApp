@@ -22,9 +22,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.prototype.ryersonapp.Events.EventsFragment;
-import com.prototype.ryersonapp.StudentLife.StudentLifeFragment;
-
 
 public class MainActivity extends FragmentActivity implements AdapterView.OnItemClickListener {
 
@@ -34,7 +31,7 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
     private int visibleFragment = 0;
     private ListView mDrawerList;
     private DrawerListAdapter mListAdapter;
-    private String[] mDrawerItems = {"Campus Life", "Student Life", "Events", "Settings", "About Us", "FeedBack"};
+    private String[] mDrawerItems = {"Campus Life", "Student Life", "Events", /*"Settings",*/ "About Us", "FeedBack"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,22 +134,24 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
                     setVisibleFragment(i);
                     break;
                 case 1:
-                    fragment = new StudentLifeFragment();
-                    setVisibleFragment(i);
+                    isFragment = false;
+                    /*fragment = new StudentLifeFragment();
+                    setVisibleFragment(i);*/
                     break;
                 case 2:
-                    fragment = new EventsFragment();
-                    setVisibleFragment(i);
+                    isFragment = false;
+                    /*fragment = new EventsFragment();
+                    setVisibleFragment(i);*/
                     break;
-                case 3:
+               /* case 3:
                     isFragment = false;
                     startActivity(new Intent(this, PreferencesActivity.class));
-                    break;
-                case 4:
+                    break;*/
+                case 3:
                     isFragment = false;
                     startActivity(new Intent(this, AboutUsActivity.class));
                     break;
-                case 5:
+                case 4:
                     isFragment = false;
                     String[] emailAddress = {"tanpar1995@gmail.com"};
                     Intent emailIntent = new Intent(Intent.ACTION_SEND);
@@ -191,7 +190,7 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
 
         private LayoutInflater inflater;
         private int mSelectedItem;
-        private int[] mDrawerDrawables = {R.drawable.ic_settings, R.drawable.ic_about, R.drawable.ic_feedback};
+        private int[] mDrawerDrawables = {/*R.drawable.ic_settings,*/ R.drawable.ic_about, R.drawable.ic_feedback};
 
         public DrawerListAdapter(LayoutInflater inflater) {
             this.inflater = inflater;
@@ -225,9 +224,16 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
 
             if (position <= 2) {
                 convertView = inflater.inflate(R.layout.layout_drawer_primary, null);
+                TextView wip = (TextView) convertView.findViewById(R.id.textview_drawer_list_primary_WIP);
+                if (position > 0) {
+                    wip.setVisibility(View.VISIBLE);
+                }
                 TextView titlePrimary = (TextView) convertView.findViewById(R.id.textView_drawer_list_primary);
                 titlePrimary.setText(mDrawerItems[position]);
-                titlePrimary.setTextColor((mSelectedItem == position) ? Color.parseColor("#3f51b5") : Color.parseColor("#454545"));
+                //titlePrimary.setTextColor((mSelectedItem == position) ? Color.parseColor("#3f51b5") : Color.parseColor("#454545"));
+                if (position == 0) {
+                    titlePrimary.setTextColor(Color.parseColor("#3f51b5"));
+                }
 
                 return convertView;
             } else {

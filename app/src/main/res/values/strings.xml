@@ -40,5 +40,8 @@
     <string name="Reminders">Reminders</string>
     <string name="Directory">Directory</string>
     <string name="CampusMap">Campus Map</string>
+    <string name="my_schedule">My Schedule</string>
+    <string name="robotoLight">sans-serif-light</string>
+    <string name="robotoThin">sans-serif-thin</string>
 
 </resources>

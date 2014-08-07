@@ -62,8 +62,8 @@ public class CampusLifeFragment extends Fragment implements AdapterView.OnItemCl
                 startActivity(new Intent(getActivity(), CampusMapActivity.class));
                 break;
             case 1:
-                isFragment=false;
-                startActivity(new Intent(getActivity(),MyScheduleActivity.class));
+                isFragment = false;
+                startActivity(new Intent(getActivity(), ScheduleActivity.class));
                 break;
             case 2:
                 isFragment = false;

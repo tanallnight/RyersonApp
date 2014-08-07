@@ -22,7 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MyScheduleActivity" android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".AboutUsActivity"
             android:label="@string/aboutus"
@@ -42,6 +41,10 @@
         <activity
             android:name=".CampusMapActivity"
             android:label="@string/CampusMap"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ScheduleActivity"
+            android:label="@string/my_schedule"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Directory.DirectoryActivity"
