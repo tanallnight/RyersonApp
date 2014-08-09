@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.prototype.ryersonapp">
+    package="com.informeapps.informeryerson">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-
 
     <application
         android:allowBackup="true"
@@ -14,7 +13,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="com.informeapps.informeryerson.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop">
             <intent-filter>
@@ -23,36 +22,36 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AboutUsActivity"
+            android:name="com.informeapps.informeryerson.AboutUsActivity"
             android:label="@string/aboutus"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.informeapps.informeryerson.MainActivity" />
         <activity
-            android:name=".PreferencesActivity"
+            android:name="com.informeapps.informeryerson.PreferencesActivity"
             android:label="@string/Preferences"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.informeapps.informeryerson.MainActivity" />
         <activity
-            android:name=".ExploreActivity"
+            android:name="com.informeapps.informeryerson.ExploreActivity"
             android:label="Explore"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.informeapps.informeryerson.MainActivity" />
         <activity
-            android:name=".Reminders.RemindersActivity"
+            android:name="com.informeapps.informeryerson.Reminders.RemindersActivity"
             android:label="@string/Reminders"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.informeapps.informeryerson.MainActivity" />
         <activity
-            android:name=".CampusMapActivity"
+            android:name="com.informeapps.informeryerson.CampusMapActivity"
             android:label="@string/CampusMap"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.informeapps.informeryerson.MainActivity" />
         <activity
-            android:name=".ScheduleActivity"
+            android:name="com.informeapps.informeryerson.ScheduleActivity"
             android:label="@string/my_schedule"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.informeapps.informeryerson.MainActivity" />
         <activity
-            android:name=".Directory.DirectoryActivity"
+            android:name="com.informeapps.informeryerson.Directory.DirectoryActivity"
             android:label="@string/Directory"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName="com.informeapps.informeryerson.MainActivity"
             android:windowSoftInputMode="stateHidden" />
 
-        <receiver android:name=".Reminders.RemindersReceiver" />
+        <receiver android:name="com.informeapps.informeryerson.Reminders.RemindersReceiver" />
     </application>
 
 
