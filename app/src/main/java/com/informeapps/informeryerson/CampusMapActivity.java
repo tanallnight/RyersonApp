@@ -1,46 +1,58 @@
 package com.informeapps.informeryerson;
 
-import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
-import android.view.Window;
-import android.webkit.WebChromeClient;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Toast;
+import android.support.v4.app.FragmentActivity;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
 
 /**
  * Created by Tanmay on 2014-08-04.
  */
-public class CampusMapActivity extends Activity {
+public class CampusMapActivity extends FragmentActivity {
 
-    private WebView webView;
+    //private WebView webView;
+    private GoogleMap googleMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().requestFeature(Window.FEATURE_PROGRESS);
         setContentView(R.layout.activity_campusmap);
+        setUpMapIfNeeded();
+    }
 
-        webView = (WebView) findViewById(R.id.webview_campusmap);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setUpMapIfNeeded();
+    }
 
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+    private void setUpMapIfNeeded() {
+        if (googleMap != null) {
+            return;
+        }
 
-        final Activity activity = this;
+        googleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
 
-        webView.setWebChromeClient(new WebChromeClient() {
-            public void onProgressChanged(WebView view, int progress) {
-                activity.setProgress(progress * 100);
-            }
-        });
+        if (googleMap == null) {
+            return;
+        }
 
-        webView.setWebViewClient(new WebViewClient() {
-            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
-                Toast.makeText(activity, "Oh no! Please Check Internet Connection", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        webView.loadUrl("https://m.ryerson.ca/core_apps/map/beta/");
+        LatLng ryerson = new LatLng(43.657929, -79.378935);
+        googleMap.setMyLocationEnabled(true);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ryerson, 16));
+        Polygon MON = googleMap.addPolygon(new PolygonOptions()
+                .add(new LatLng(43.659634, -79.378301), new LatLng(43.659791, -79.37836), new LatLng(43.659816, -79.378362),
+                        new LatLng(43.659906, -79.377967), new LatLng(43.659759, -79.377907), new LatLng(43.659728, -79.377906),
+                        new LatLng(43.659712, -79.377985), new LatLng(43.659716, -79.37799)));
+        MON.setStrokeColor(Color.GRAY);
+        MON.setFillColor(Color.LTGRAY);
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(43.65978, -79.378136)).title("MON"));
     }
 }
