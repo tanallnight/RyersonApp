@@ -1,21 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!--
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <WebView
-        android:id="@+id/webview_campusmap"
+    <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        map:mapType="normal" />
 
-</RelativeLayout>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="16dp"
+        android:background="@drawable/card_noround"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:weightSum="100">
 
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:map="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    map:mapType="normal" />
+        <AutoCompleteTextView
+            android:id="@+id/autocompletetextview_campusmap"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="20"
+            android:background="@android:color/transparent"
+            android:drawableLeft="@drawable/ic_search"
+            android:hint="Search"
+            android:imeOptions="actionSearch"
+            android:singleLine="true"
+            android:textColor="#555555" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="8dp"
+            android:background="#999999" />
+
+        <ImageButton
+            android:id="@+id/imagebutton_campusmap_navigate"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="80"
+            android:background="@drawable/image_button_grey_selector"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_directions" />
+    </LinearLayout>
+
+</RelativeLayout>
+
+

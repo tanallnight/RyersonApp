@@ -3,6 +3,7 @@ package com.informeapps.informeryerson;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
@@ -31,7 +32,7 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
     private int visibleFragment = 0;
     private ListView mDrawerList;
     private DrawerListAdapter mListAdapter;
-    private String[] mDrawerItems = {"Campus Life", "Student Life", "Events", /*"Settings",*/ "About Us", "FeedBack"};
+    private String[] mDrawerItems = {"Campus Life", "Places", "Events", /*"Settings",*/ "About Us", "FeedBack"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,11 +154,14 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
                     break;
                 case 4:
                     isFragment = false;
-                    String[] emailAddress = {"tanpar1995@gmail.com"};
+                    String[] emailAddress = {"informeapplications@gmail.com"};
+                    String deviceInfo = "\n\n\nAPI Level: " + Build.VERSION.SDK_INT + "\n" + Build.DEVICE + "\n"
+                            + Build.MODEL + "\n" + Build.MANUFACTURER + "\n" + Build.PRODUCT;
                     Intent emailIntent = new Intent(Intent.ACTION_SEND);
                     emailIntent.putExtra(Intent.EXTRA_EMAIL, emailAddress);
                     emailIntent.setType("plain/text");
-                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback RyersonApp");
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback InforMeRyerson");
+                    emailIntent.putExtra(Intent.EXTRA_TEXT, deviceInfo);
                     startActivity(emailIntent);
                     break;
             }

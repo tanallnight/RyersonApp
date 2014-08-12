@@ -36,7 +36,6 @@ public class ScheduleActivity extends FragmentActivity {
             MonthDays[z] = whatMonth(Day[z]);
         }
 
-
         final ScheduleListDateAdapter adapter = new ScheduleListDateAdapter(this, Days, MonthDays);
         listView = (ListView) findViewById(R.id.listview_myschedule_date);
 

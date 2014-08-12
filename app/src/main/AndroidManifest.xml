@@ -34,7 +34,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyC40FdGqPgQ88pIk7C6QIerhbOzj2tD7hk" />
+            android:value="AIzaSyAUR4isB-ut5fptVqTTt5j4LqoF4S-ODaY" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -66,7 +66,7 @@
             android:label="@string/Reminders"
             android:parentActivityName="com.informeapps.informeryerson.MainActivity" />
         <activity
-            android:name="com.informeapps.informeryerson.CampusMapActivity"
+            android:name=".CampusMap.CampusMapActivity"
             android:label="@string/CampusMap"
             android:parentActivityName="com.informeapps.informeryerson.MainActivity" />
         <activity

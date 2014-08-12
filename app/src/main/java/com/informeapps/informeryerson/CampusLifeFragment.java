@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.informeapps.informeryerson.CampusMap.CampusMapActivity;
 import com.informeapps.informeryerson.Directory.DirectoryActivity;
 import com.informeapps.informeryerson.Reminders.RemindersActivity;
 import com.squareup.picasso.Picasso;
