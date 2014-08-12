@@ -1,28 +1,68 @@
 package com.informeapps.informeryerson.CampusMap;
 
-import android.graphics.Color;
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
+import android.view.Window;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polygon;
-import com.google.android.gms.maps.model.PolygonOptions;
 import com.informeapps.informeryerson.R;
 
 /**
  * Created by Tanmay on 2014-08-04.
  */
-public class CampusMapActivity extends FragmentActivity {
+public class CampusMapActivity extends Activity {
 
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        getWindow().requestFeature(Window.FEATURE_PROGRESS);
+        setContentView(R.layout.activity_campusmap);
+
+        WebView webView = (WebView) findViewById(R.id.webview_campusmap);
+
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+
+        final Activity activity = this;
+
+        webView.setWebChromeClient(new WebChromeClient() {
+            public void onProgressChanged(WebView view, int progress) {
+                activity.setProgress(progress * 10);
+            }
+        });
+        webView.setWebViewClient(new WebViewClient() {
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                Toast.makeText(activity, "Oh no! Please Check Internet Connection", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        webView.loadUrl("https://m.ryerson.ca/core_apps/map/beta/");
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
     private GoogleMap googleMap;
     private AutoCompleteTextView autoCompleteTextView;
     private String[] locationsArray;
@@ -94,5 +134,5 @@ public class CampusMapActivity extends FragmentActivity {
         MON.setStrokeColor(Color.GRAY);
         MON.setStrokeWidth(3);
         MON.setFillColor(Color.LTGRAY);
-    }
+    }*/
 }
