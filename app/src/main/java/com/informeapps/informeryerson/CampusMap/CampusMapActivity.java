@@ -33,7 +33,7 @@ public class CampusMapActivity extends Activity {
 
         webView.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int progress) {
-                activity.setProgress(progress * 10);
+                activity.setProgress(progress * 100);
             }
         });
         webView.setWebViewClient(new WebViewClient() {
