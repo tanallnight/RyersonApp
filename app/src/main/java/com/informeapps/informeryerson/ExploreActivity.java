@@ -66,9 +66,8 @@ public class ExploreActivity extends Activity {
 
                 ExploreViewListItems.smoothScrollToPositionFromTop(position, 0, 150);
 
+                //Arrow Rotation
                 ImageView icon = (ImageView) view.findViewById(R.id.imageview_explore_downicon);
-
-
                 if (!isRotated) {
                     RotateAnimation rotateAnimation = new RotateAnimation(180, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                     rotateAnimation.setDuration(250);
@@ -117,6 +116,11 @@ public class ExploreActivity extends Activity {
             //StoreLogo.setImageResource(ResourceID(getItem(position)));//set the image resource
             StoreLogo.setImageResource(R.raw.campuslife_header);
 
+            View toolbar = convertView.findViewById(R.id.EpandedInfo);
+            ((LinearLayout.LayoutParams) toolbar.getLayoutParams()).bottomMargin = -50;
+            toolbar.setVisibility(View.GONE);
+
+            //Favourites button click listener
             final ImageButton fav = (ImageButton) convertView.findViewById(R.id.imagebutton_explore_list_favourite);
             fav.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -142,10 +146,6 @@ public class ExploreActivity extends Activity {
                     }, 150);
                 }
             });
-
-            View toolbar = convertView.findViewById(R.id.EpandedInfo);
-            ((LinearLayout.LayoutParams) toolbar.getLayoutParams()).bottomMargin = -50;
-            toolbar.setVisibility(View.GONE);
 
             return convertView;
         }

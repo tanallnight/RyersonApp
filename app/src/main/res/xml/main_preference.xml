@@ -1,48 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:key="pref_key_contributions_category"
-        android:title="@string/contributions_caps" >
-        <PreferenceScreen
-            android:key="pref_key_about_iconography"
-            android:title="@string/iconography" >
-            <Preference
-                android:selectable="false"
-                android:title="@string/Amit_Jakhu" />
-            <Preference
-                android:selectable="false"
-                android:title="@string/Designmodo" />
-            <Preference
-                android:selectable="false"
-                android:title="@string/Freepik" />
-            <Preference
-                android:selectable="false"
-                android:title="@string/Icons8" />
-            <Preference
-                android:selectable="false"
-                android:title="@string/Icomoon" />
-            <Preference
-                android:selectable="false"
-                android:title="@string/Scott_de_Jonge" />
-            <Preference
-                android:selectable="false"
-                android:title="@string/SimpleIcon" />
-            <Preference
-                android:selectable="false"
-                android:title="@string/Situ_Herrera" />
-        </PreferenceScreen>
-        <PreferenceScreen
-            android:key="pref_key_about_contributions"
-            android:title="@string/images" >
-            <Preference
-                android:selectable="false"
-                android:title="@string/Farhan_Riaz" />
-        </PreferenceScreen>
-    </PreferenceCategory>
-    <PreferenceCategory
         android:key="pref_key_about_category"
-        android:title="@string/prefs_about_category" >
+        android:title="@string/prefs_about_category">
         <Preference
             android:key="pref_key_appVersion"
             android:summary="@string/prefs_about_appVersion_value"

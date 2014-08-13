@@ -19,17 +19,6 @@
     <string name="images">Images</string>
     <string name="prefs_about_appVersion">App Version</string>
     <string name="prefs_about_appVersion_value">0.1 Pre-Alpha</string>
-
-    <string name="SimpleIcon">SimpleIcon</string>
-    <string name="Situ_Herrera">Situ Herrera</string>
-    <string name="Scott_de_Jonge">Scott de Jonge</string>
-    <string name="Designmodo">Designmodo</string>
-    <string name="Amit_Jakhu">Amit Jakhu</string>
-    <string name="Freepik">Freepik</string>
-    <string name="Icomoon">Icomoon</string>
-    <string name="Icons8">Icons8</string>
-
-    <string name="Farhan_Riaz">Farhan Riaz</string>
     <string name="Search">Search</string>
     <string name="Bookstore">Bookstore</string>
     <string name="Description">Description</string>
@@ -43,5 +32,8 @@
     <string name="my_schedule">My Schedule</string>
     <string name="robotoLight">sans-serif-light</string>
     <string name="robotoThin">sans-serif-thin</string>
+    <string name="Contributions">Contributions</string>
+    <string name="aboutus_writeup">Started by Ryerson students for Ryerson students, we wanted to create a platform that would allow all us students to stay connected to their surroundings and the things that matter most to them. As students, we felt that the outflow of information at our school could be presented in a better way. We aim to do just that.\n\nHowever, since we are new to this, getting up and doing something about it thing, feel free to give us some feedback on what you think so far. Stay Tuned.\n\nMission: To keep every Ryerson student connected to their surroundings and the things that matter to them.</string>
+    <string name="About">About</string>
 
 </resources>
