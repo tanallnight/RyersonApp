@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.informeapps.informeryerson.R;
-import com.informeapps.informeryerson.ServiceHandler;
+import com.informeapps.informeryerson.Misc.ServiceHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;

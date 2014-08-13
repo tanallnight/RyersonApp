@@ -43,7 +43,6 @@ public class ScheduleActivity extends FragmentActivity {
             Days[z] = shiftDate(Calendar.getInstance(), z);
             MonthDays[z] = whatMonth(Day[z]);
         }
-
         //
         // GETTING STUFF FROM CALENDAR START
         //
@@ -96,7 +95,8 @@ public class ScheduleActivity extends FragmentActivity {
             //
         }
 
-        final ScheduleListDateAdapter adapter = new ScheduleListDateAdapter(this, Days, MonthDays);
+
+            final ScheduleListDateAdapter adapter = new ScheduleListDateAdapter(this, Days, MonthDays);
         listView = (ListView) findViewById(R.id.listview_myschedule_date);
 
         listView.setAdapter(adapter);

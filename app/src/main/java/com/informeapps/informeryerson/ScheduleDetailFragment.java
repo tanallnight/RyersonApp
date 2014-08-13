@@ -61,7 +61,7 @@ public class ScheduleDetailFragment extends Fragment {
         for (int i = 0; i < CalNames.length; i++) {
 
             CalIds[i] = mCursor.getInt(0);
-            CalNames[i] = "Title: " + mCursor.getString(1) + "\nDescription: " + mCursor.getString(2) + "\nLocation : " + mCursor.getString(5);
+            CalNames[i] = "" + mCursor.getString(1) + "\n" + mCursor.getString(2) + "\n" + mCursor.getString(3)+"\n" + mCursor.getString(4)+"\n" + mCursor.getString(5);
             sDate[i] = new Date(mCursor.getLong(3));
             slong[i] = sDate[i].getTime();
             eDate[i] = new Date(mCursor.getLong(4));
@@ -80,7 +80,7 @@ public class ScheduleDetailFragment extends Fragment {
                 index1 = i + 1;
 
             }
-            if (elong[i] <= lngEndTime) {
+            if (elong[i] >= lngEndTime) {
                 index2 = i;
             }
 

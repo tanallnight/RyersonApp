@@ -23,12 +23,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.informeapps.informeryerson.StudentLife.StudentLifeFragment;
+
 
 public class MainActivity extends FragmentActivity implements AdapterView.OnItemClickListener {
 
     public ActionBarDrawerToggle mDrawerToggle;
     public DrawerLayout mDrawerLayout;
-    //private int previousFragment = 0;
+    private int previousFragment = 0;
     private int visibleFragment = 0;
     private ListView mDrawerList;
     private DrawerListAdapter mListAdapter;
@@ -135,9 +137,9 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
                     setVisibleFragment(i);
                     break;
                 case 1:
-                    isFragment = false;
-                    /*fragment = new StudentLifeFragment();
-                    setVisibleFragment(i);*/
+                    isFragment = true;
+                    fragment = new StudentLifeFragment();
+                    setVisibleFragment(i);
                     break;
                 case 2:
                     isFragment = false;
@@ -183,7 +185,7 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
             }
         }
         mDrawerLayout.closeDrawer(mDrawerList);
-        //previousFragment = i;
+        previousFragment = i;
     }
 
     public void setVisibleFragment(int i) {
@@ -234,7 +236,7 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
                 }
                 TextView titlePrimary = (TextView) convertView.findViewById(R.id.textView_drawer_list_primary);
                 titlePrimary.setText(mDrawerItems[position]);
-                //titlePrimary.setTextColor((mSelectedItem == position) ? Color.parseColor("#3f51b5") : Color.parseColor("#454545"));
+                titlePrimary.setTextColor((mSelectedItem == position) ? Color.parseColor("#3f51b5") : Color.parseColor("#454545"));
                 if (position == 0) {
                     titlePrimary.setTextColor(Color.parseColor("#3f51b5"));
                 }

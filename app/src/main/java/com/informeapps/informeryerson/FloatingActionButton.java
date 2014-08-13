@@ -113,9 +113,6 @@ public class FloatingActionButton extends View {
 
         public Builder(Activity context) {
             scale = context.getResources().getDisplayMetrics().density;
-            // The calculation (value * scale + 0.5f) is a widely used to convert to dps to pixel units
-            // based on density scale
-            // see developer.android.com (Supporting Multiple Screen Sizes)
             size = (int) (72 * scale + 0.5f); // default size is 72dp by 72dp
             params = new FrameLayout.LayoutParams(size, size);
             params.gravity = gravity;
@@ -123,42 +120,30 @@ public class FloatingActionButton extends View {
             this.activity = context;
         }
 
-        /**
-         * Sets the gravity for the FAB
-         */
         public Builder withGravity(int gravity) {
             this.gravity = gravity;
             return this;
         }
 
-        /**
-         * Sets the margins for the FAB in dp
-         */
+
         public Builder withMargins(int left, int top, int right, int bottom) {
             params.setMargins((int) (left * scale + 0.5f), (int) (top * scale + 0.5f),
                     (int) (right * scale + 0.5f), (int) (bottom * scale + 0.5f));
             return this;
         }
 
-        /**
-         * Sets the FAB drawable
-         */
+
         public Builder withDrawable(final Drawable drawable) {
             this.drawable = drawable;
             return this;
         }
 
-        /**
-         * Sets the FAB color
-         */
+
         public Builder withButtonColor(final int color) {
             this.color = color;
             return this;
         }
 
-        /**
-         * Sets the FAB size in dp
-         */
         public Builder withButtonSize(int size) {
             size = (int) (size * scale + 0.5f);
             params = new FrameLayout.LayoutParams(size, size);

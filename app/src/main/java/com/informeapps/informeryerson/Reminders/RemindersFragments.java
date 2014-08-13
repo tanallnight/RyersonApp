@@ -18,11 +18,13 @@ import android.widget.TextView;
 
 import com.informeapps.informeryerson.FloatingActionButton;
 import com.informeapps.informeryerson.R;
+import com.informeapps.informeryerson.Misc.SwipeDismissListViewTouchListener;
 
 import java.util.List;
 
 public class RemindersFragments extends Fragment implements AdapterView.OnItemClickListener {
 
+    //initializing variabls
     private static FloatingActionButton floatingActionButton;
     private View rootView;
     private ListView listView;
@@ -32,10 +34,15 @@ public class RemindersFragments extends Fragment implements AdapterView.OnItemCl
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_campuslife_reminders, container, false);
-        getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        rootView = inflater.inflate(R.layout.fragment_campuslife_reminders, container, false);//setting layout
+        getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);//for going back
+
+       //handles database
         databaseHandler = new ReminderDatabaseHandler(getActivity());
         reminders = databaseHandler.getAllReminders();
+
 
         listView = (ListView) rootView.findViewById(R.id.listview_remiders);
         adapter = new ReminderListAdapter();
@@ -44,8 +51,28 @@ public class RemindersFragments extends Fragment implements AdapterView.OnItemCl
 
         if (adapter.getCount() == 0) {
             listView.setVisibility(View.GONE);
-
         }
+        SwipeDismissListViewTouchListener touchListener =
+                new SwipeDismissListViewTouchListener(
+                        listView,
+                        new SwipeDismissListViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(ListView listView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+                                    databaseHandler.deleteReminder(reminders.get(position));
+                                }
+                               adapter.notifyDataSetChanged();
+                            }
+                        });
+
+        //checks for scrolling vs swiping
+        listView.setOnTouchListener(touchListener);
+        listView.setOnScrollListener(touchListener.makeScrollListener());
 
         initializeFloatingActionButton();
 

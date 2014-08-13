@@ -1,4 +1,4 @@
-package com.informeapps.informeryerson;
+package com.informeapps.informeryerson.Misc;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

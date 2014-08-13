@@ -30,6 +30,7 @@ public class ExpandAnimation extends Animation {
         layoutPrams = (LayoutParams) view.getLayoutParams();
 
 
+
         blnVisible = (view.getVisibility() == View.VISIBLE); //checks visibility of current view
 
         //gets the positions of the layouts
@@ -43,10 +44,12 @@ public class ExpandAnimation extends Animation {
     protected void applyTransformation(float interpolatedTime, Transformation t) {
         super.applyTransformation(interpolatedTime, t);
 
+
         if (interpolatedTime < 1.0f) {
             layoutPrams.bottomMargin = intStartPos + (int) ((intEndPos - intStartPos) * interpolatedTime);//calculating the height
             AnimationView.requestLayout();
-        } else if (blnAnimationDone == false) {
+        }
+        else if (blnAnimationDone == false) {
             layoutPrams.bottomMargin = intEndPos;
             AnimationView.requestLayout();
 
@@ -57,11 +60,4 @@ public class ExpandAnimation extends Animation {
         }
     }
 
-    public boolean isBlnVisible() {
-        return blnVisible;
-    }
-
-    public int getIntEndPos() {
-        return intEndPos;
-    }
 }
