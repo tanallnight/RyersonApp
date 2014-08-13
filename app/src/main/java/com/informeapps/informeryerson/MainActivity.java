@@ -23,8 +23,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.informeapps.informeryerson.StudentLife.StudentLifeFragment;
-
 
 public class MainActivity extends FragmentActivity implements AdapterView.OnItemClickListener {
 
@@ -137,9 +135,9 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
                     setVisibleFragment(i);
                     break;
                 case 1:
-                    isFragment = true;
-                    fragment = new StudentLifeFragment();
-                    setVisibleFragment(i);
+                    isFragment = false;
+                    /*fragment = new StudentLifeFragment();
+                    setVisibleFragment(i);*/
                     break;
                 case 2:
                     isFragment = false;

@@ -6,10 +6,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.informeapps.informeryerson.R;
@@ -21,15 +22,17 @@ public class CampusMapActivity extends Activity {
 
     private String mapsUrl = "https://m.ryerson.ca/core_apps/map/beta/";
     private WebView webView;
+    private ProgressBar progressBar;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        getWindow().requestFeature(Window.FEATURE_PROGRESS);
         setContentView(R.layout.activity_campusmap);
 
         webView = (WebView) findViewById(R.id.webview_campusmap);
+        //progressBar = (ProgressBar) findViewById(R.id.progressBar_campusmap);
+        textView = (TextView) findViewById(R.id.textview_campusmap_progress);
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
@@ -38,7 +41,13 @@ public class CampusMapActivity extends Activity {
 
         webView.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int progress) {
-                activity.setProgress(progress * 100);
+                if (progress != 100) {
+                    textView.setText(progress + "%");
+                    //progressBar.setProgress(progress);
+                } else {
+                    textView.setVisibility(View.GONE);
+                    //progressBar.setVisibility(View.GONE);
+                }
             }
         });
         webView.setWebViewClient(new WebViewClient() {
@@ -72,6 +81,10 @@ public class CampusMapActivity extends Activity {
         switch (item.getItemId()) {
             case R.id.action_campusmap_refresh:
                 webView.reload();
+                textView.setText("0%");
+                textView.setVisibility(View.VISIBLE);
+                //progressBar.setVisibility(View.VISIBLE);
+                //progressBar.setProgress(0);
                 return true;
         }
 

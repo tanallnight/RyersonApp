@@ -64,9 +64,9 @@ public class AboutUsActivity extends FragmentActivity implements AdapterView.OnI
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         View expandedView = view.findViewById(R.id.layout_list_aboutus_team_expanded);
-        ExpandAnimation expandAnimation = new ExpandAnimation(view, 250);
+        ExpandAnimation expandAnimation = new ExpandAnimation(expandedView, 250);
         expandedView.startAnimation(expandAnimation);
-        listView.smoothScrollToPositionFromTop(i, 0, 150);
+        listView.smoothScrollToPositionFromTop(i, 100, 250);
     }
 
     public static class AboutUsPagerFragment extends Fragment {
@@ -82,7 +82,7 @@ public class AboutUsActivity extends FragmentActivity implements AdapterView.OnI
             Bundle b = getArguments();
             position = b.getInt("POSITION");
 
-            switch (position){
+            switch (position) {
                 case 0:
                     listData = getResources().getStringArray(R.array.Libraries);
                     title = "Libraries";

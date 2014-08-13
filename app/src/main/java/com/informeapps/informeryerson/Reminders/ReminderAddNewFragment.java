@@ -95,6 +95,7 @@ public class ReminderAddNewFragment extends Fragment implements View.OnClickList
         if (!title.getText().toString().equals("")) {
             databaseHandler.addReminder(new Reminder(title.getText().toString(), description.getText().toString(),
                     tDay, tMonth, tYear, tHour, tMinute));
+            add.setClickable(false);
             processNotification();
             Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up_rotate);
             animation.setInterpolator(getActivity(), android.R.anim.overshoot_interpolator);
