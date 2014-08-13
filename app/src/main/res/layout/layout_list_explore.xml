@@ -87,7 +87,7 @@
     <LinearLayout
         android:id="@+id/EpandedInfo"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_marginBottom="-50dp"
         android:orientation="vertical"
         android:visibility="gone">

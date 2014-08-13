@@ -18,22 +18,44 @@
             android:layout_height="match_parent"
             android:layout_weight="6"
             android:src="@raw/campuslife_header"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:id="@+id/campuslife_BookstorePicture"/>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:src="@raw/map_placeholder"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:id="@+id/campuslife_BookstoreMap"/>
     </LinearLayout>
 
     <TextView
+        android:id="@+id/campuslife_BookstoreName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Some Bookstore"
         android:fontFamily="sans-serif-light"
         android:textColor="#454545"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:layout_margin="16dp" />
+
+    <LinearLayout
+        android:id="@+id/BookStoreExpandedInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:layout_marginBottom="-50dp"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <!--Change LinearLayout Height depending on how many items to show-->
+
+        <TextView
+            android:id="@+id/DeaItems"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="ITEM1\nITEM2\nITEM3\nITEM4" />
+
+    </LinearLayout>
+
+
 </LinearLayout>

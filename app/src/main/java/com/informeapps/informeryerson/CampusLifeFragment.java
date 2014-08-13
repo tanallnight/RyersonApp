@@ -74,8 +74,8 @@ public class CampusLifeFragment extends Fragment implements AdapterView.OnItemCl
                 isFragment = false;
                 startActivity(new Intent(getActivity(), DirectoryActivity.class));
             case 4:
-                fragment = new BookstoreFragment();
-                break;
+                isFragment = false;
+                startActivity(new Intent(getActivity(), BookstoreActivity.class));
         }
 
         if (isFragment && fragment != null) {

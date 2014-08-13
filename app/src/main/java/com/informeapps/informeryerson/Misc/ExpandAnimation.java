@@ -1,4 +1,4 @@
-package com.informeapps.informeryerson;
+package com.informeapps.informeryerson.Misc;
 
 import android.view.View;
 import android.view.animation.Animation;
@@ -49,11 +49,11 @@ public class ExpandAnimation extends Animation {
             layoutPrams.bottomMargin = intStartPos + (int) ((intEndPos - intStartPos) * interpolatedTime);//calculating the height
             AnimationView.requestLayout();
         }
-        else if (blnAnimationDone == false) {
+        else if (!blnAnimationDone) {
             layoutPrams.bottomMargin = intEndPos;
             AnimationView.requestLayout();
 
-            if (blnVisible == true) {
+            if (blnVisible) {
                 AnimationView.setVisibility(View.GONE);
             }
             blnAnimationDone = true;

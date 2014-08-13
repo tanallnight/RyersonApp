@@ -58,7 +58,7 @@
             android:label="@string/Preferences"
             android:parentActivityName="com.informeapps.informeryerson.MainActivity" />
         <activity
-            android:name="com.informeapps.informeryerson.ExploreActivity"
+            android:name=".StudentLife.ExploreActivity"
             android:label="Explore"
             android:parentActivityName="com.informeapps.informeryerson.MainActivity" />
         <activity
@@ -78,6 +78,8 @@
             android:label="@string/Directory"
             android:parentActivityName="com.informeapps.informeryerson.MainActivity"
             android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".BookstoreActivity"
+            android:parentActivityName="com.informeapps.informeryerson.MainActivity"/>
 
         <receiver android:name="com.informeapps.informeryerson.Reminders.RemindersReceiver" />
     </application>
