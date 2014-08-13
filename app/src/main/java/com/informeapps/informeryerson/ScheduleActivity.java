@@ -64,37 +64,40 @@ public class ScheduleActivity extends FragmentActivity {
                 //Log.d("Cursor", "true");
                 calendarID = new String[]{_id};
             }
-
-            Uri.Builder builder = CalendarContract.Instances.CONTENT_URI.buildUpon();
-
-            Calendar beginTime = Calendar.getInstance();
-            beginTime.set(2014, Calendar.SEPTEMBER, 2, 8, 0);
-            long startMills = beginTime.getTimeInMillis();
-
-            Calendar endTime = Calendar.getInstance();
-            endTime.set(2014, Calendar.SEPTEMBER, 2, 20, 0);
-            long endMills = endTime.getTimeInMillis();
-
-            ContentUris.appendId(builder, startMills);
-            ContentUris.appendId(builder, endMills);
-
-            Cursor eventCursor = contentResolver.query(builder.build(), new String[]{CalendarContract.Instances.TITLE,
-                            CalendarContract.Instances.BEGIN, CalendarContract.Instances.END, CalendarContract.Instances.DESCRIPTION},
-                    CalendarContract.Instances.CALENDAR_ID + " = ?", calendarID, null);
-
-            while (eventCursor.moveToNext()) {
-                final String title = eventCursor.getString(0);
-                final Date begin = new Date(eventCursor.getLong(1));
-                final Date end = new Date(eventCursor.getLong(2));
-                final String description = eventCursor.getString(3);
-
-                Log.d("Cursor", "Title: " + title + "\tDescription: " + description + "\tBegin: " + begin + "\tEnd: " + end);
-            }
-
-            //
-            // GETTING STUFF FROM CALENDAR END
-            //
         }
+
+        Uri.Builder builder = CalendarContract.Instances.CONTENT_URI.buildUpon();
+
+        Calendar beginTime = Calendar.getInstance();
+        beginTime.set(2014, Calendar.SEPTEMBER, 2, 8, 0);
+        long startMills = beginTime.getTimeInMillis();
+
+        Calendar endTime = Calendar.getInstance();
+        endTime.set(2014, Calendar.SEPTEMBER, 2, 20, 0);
+        long endMills = endTime.getTimeInMillis();
+
+        ContentUris.appendId(builder, startMills);
+        ContentUris.appendId(builder, endMills);
+
+        Cursor eventCursor = contentResolver.query(builder.build(), new String[]{CalendarContract.Instances.TITLE,
+                        CalendarContract.Instances.BEGIN, CalendarContract.Instances.END, CalendarContract.Instances.DESCRIPTION},
+                CalendarContract.Instances.CALENDAR_ID + " = ?", calendarID, null);
+
+        while (eventCursor.moveToNext()) {
+            final String title = eventCursor.getString(0);
+            final Date begin = new Date(eventCursor.getLong(1));
+            final Date end = new Date(eventCursor.getLong(2));
+            final String description = eventCursor.getString(3);
+
+            Log.d("Cursor", "\nTitle: " + title + "\n\nDescription: " + description + "\n\nBegin: " + begin + "\nEnd: " + end);
+        }
+
+        cursor.close();
+        eventCursor.close();
+        //
+        // GETTING STUFF FROM CALENDAR END
+        //
+
 
         final ScheduleListDateAdapter adapter = new ScheduleListDateAdapter(this, Days, MonthDays);
         listView = (ListView) findViewById(R.id.listview_myschedule_date);
