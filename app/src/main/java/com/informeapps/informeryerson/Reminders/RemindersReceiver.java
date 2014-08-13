@@ -31,7 +31,7 @@ public class RemindersReceiver extends BroadcastReceiver {
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.drawable.ic_delete_notification)
+                .setSmallIcon(R.drawable.ic_stat_today)
                 .setContentTitle(title)
                 .setContentText(description)
                 .setSound(soundUri)

@@ -16,6 +16,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.doomonafireball.betterpickers.calendardatepicker.CalendarDatePickerDialog;
 import com.doomonafireball.betterpickers.radialtimepicker.RadialPickerLayout;
@@ -84,26 +85,30 @@ public class ReminderAddNewFragment extends Fragment implements View.OnClickList
                 getActivity().getSupportFragmentManager().popBackStack();
                 break;
             case R.id.button_newreminder_add:
-                processNotification();
                 addButtonPressed();
                 break;
         }
     }
 
     private void addButtonPressed() {
-        databaseHandler.addReminder(new Reminder(title.getText().toString(), description.getText().toString(),
-                tDay, tMonth, tYear, tHour, tMinute));
 
-        Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up_rotate);
-        animation.setInterpolator(getActivity(), android.R.anim.overshoot_interpolator);
-        done.setAnimation(animation);
-        done.setVisibility(View.VISIBLE);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getActivity().getSupportFragmentManager().popBackStack();
-            }
-        }, 700);
+        if (!title.getText().toString().equals("")) {
+            databaseHandler.addReminder(new Reminder(title.getText().toString(), description.getText().toString(),
+                    tDay, tMonth, tYear, tHour, tMinute));
+            processNotification();
+            Animation animation = AnimationUtils.loadAnimation(getActivity(), R.anim.scale_up_rotate);
+            animation.setInterpolator(getActivity(), android.R.anim.overshoot_interpolator);
+            done.setAnimation(animation);
+            done.setVisibility(View.VISIBLE);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    getActivity().getSupportFragmentManager().popBackStack();
+                }
+            }, 700);
+        } else {
+            Toast.makeText(getActivity(), "Title field cannot be empty", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void timePickerPressed() {
