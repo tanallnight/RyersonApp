@@ -42,7 +42,6 @@ public class SwipeDismissListViewTouchListener implements View.OnTouchListener {
     private int mDownPosition;
     private View mDownView;
     private boolean mPaused;
-    int test;
 
     public interface DismissCallbacks {
 
