@@ -36,4 +36,5 @@ dependencies {
     }
     compile 'com.google.android.gms:play-services:5.0.89'
     compile 'de.hdodenhof:circleimageview:1.2.0'
+    compile 'de.timroes.android:EnhancedListView:0.3.4'
 }

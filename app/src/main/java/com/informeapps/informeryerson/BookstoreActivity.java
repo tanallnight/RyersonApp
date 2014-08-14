@@ -22,7 +22,7 @@ public class BookstoreActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_campuslife_bookstore);
+        setContentView(R.layout.activity_bookstore);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
         setTitle("Bookstores");

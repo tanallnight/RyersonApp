@@ -1,61 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/card_noround"
-    android:layout_margin="8dp">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:orientation="horizontal"
-        android:weightSum="10">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="6"
-            android:src="@raw/campuslife_header"
-            android:scaleType="centerCrop"
-            android:id="@+id/campuslife_BookstorePicture"/>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:src="@raw/map_placeholder"
-            android:scaleType="centerCrop"
-            android:id="@+id/campuslife_BookstoreMap"/>
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/campuslife_BookstoreName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Some Bookstore"
-        android:fontFamily="sans-serif-light"
-        android:textColor="#454545"
-        android:textSize="30sp"
-        android:layout_margin="16dp" />
+        android:background="@drawable/card_noround"
+        android:orientation="vertical">
 
-    <LinearLayout
-        android:id="@+id/BookStoreExpandedInfo"
-        android:layout_width="fill_parent"
-        android:layout_height="100dp"
-        android:layout_marginBottom="-50dp"
-        android:orientation="vertical"
-        android:visibility="gone">
-        <!--Change LinearLayout Height depending on how many items to show-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <ImageView
+                android:id="@+id/campuslife_BookstorePicture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="6"
+                android:scaleType="centerCrop"
+                android:src="@raw/campuslife_header" />
+
+            <ImageView
+                android:id="@+id/campuslife_BookstoreMap"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:scaleType="centerCrop"
+                android:src="@raw/map_placeholder" />
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/DeaItems"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="ITEM1\nITEM2\nITEM3\nITEM4" />
+            android:id="@+id/campuslife_BookstoreName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:fontFamily="sans-serif-light"
+            android:text="Some Bookstore"
+            android:textColor="#454545"
+            android:textSize="30sp" />
 
+        <LinearLayout
+            android:id="@+id/BookStoreExpandedInfo"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:layout_marginBottom="-50dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <!--Change LinearLayout Height depending on how many items to show-->
+
+            <TextView
+                android:id="@+id/DeaItems"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="ITEM1\nITEM2\nITEM3\nITEM4" />
+
+        </LinearLayout>
     </LinearLayout>
-
 
 </LinearLayout>
