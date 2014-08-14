@@ -40,14 +40,28 @@ public class BookstoreActivity extends Activity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 View BookstoreExpand = view.findViewById(R.id.BookStoreExpandedInfo);
-                ExpandAnimation expandAnimation = new ExpandAnimation(BookstoreExpand,getResources().getInteger(R.integer.ExpandAnimationDuration));
+                ExpandAnimation expandAnimation = new ExpandAnimation(BookstoreExpand, getResources().getInteger(R.integer.ExpandAnimationDuration));
                 BookstoreExpand.startAnimation(expandAnimation);
 
-                BookStorelistView.smoothScrollToPositionFromTop(i,0,getResources().getInteger(R.integer.SmoothScroolDuration));
+                BookStorelistView.smoothScrollToPositionFromTop(i, 150, getResources().getInteger(R.integer.SmoothScroolDuration));
 
             }
         });
-         }
+    }
+
+    public int ResourceID(String StoreName, boolean map) {
+        int ResID;
+        String n = StoreName.toLowerCase();
+        String name = n.replaceAll("\\W", "");
+        if (map) {
+            name = name + "map";
+        } else {
+            name = name + "";
+        }
+        ResID = getResources().getIdentifier(name, "drawable", getPackageName());
+        return ResID;
+    }
+
     class ListAdapter extends ArrayAdapter<String> {
 
 
@@ -61,26 +75,19 @@ public class BookstoreActivity extends Activity {
             if (convertView == null) {
                 convertView = getLayoutInflater().inflate(R.layout.layout_list_bookstore, null);
             }
-            TextView BookStoreName =(TextView)convertView.findViewById(R.id.campuslife_BookstoreName);
-            ImageView BookStorePicture=(ImageView)convertView.findViewById(R.id.campuslife_BookstorePicture);
-            ImageView BookStoreMap = (ImageView)convertView.findViewById(R.id.campuslife_BookstoreMap);
+            TextView BookStoreName = (TextView) convertView.findViewById(R.id.campuslife_BookstoreName);
+            ImageView BookStorePicture = (ImageView) convertView.findViewById(R.id.campuslife_BookstorePicture);
+            ImageView BookStoreMap = (ImageView) convertView.findViewById(R.id.campuslife_BookstoreMap);
             BookStoreName.setText(getItem(position));
-            BookStoreMap.setImageResource(ResourceID(getItem(position),true));
+            BookStoreMap.setImageResource(ResourceID(getItem(position), true));
 
-            if(getItem(position).equals("Ryerson Campus Store"))
-            {
+            if (getItem(position).equals("Ryerson Campus Store")) {
 
-            }
-            else if(getItem(position).equals("Discount Textbooks"))
-            {
+            } else if (getItem(position).equals("Discount Textbooks")) {
 
-            }
-            else if(getItem(position).equals("Canadian Campus Bookstore"))
-            {
+            } else if (getItem(position).equals("Canadian Campus Bookstore")) {
 
-            }
-            else if(getItem(position).equals("Ryerson Students Union"))
-            {
+            } else if (getItem(position).equals("Ryerson Students Union")) {
 
             }
 
@@ -90,19 +97,5 @@ public class BookstoreActivity extends Activity {
 
             return convertView;
         }
-    }
-
-    public int ResourceID(String StoreName,boolean map) {
-        int ResID;
-        String n = StoreName.toLowerCase();
-        String name = n.replaceAll("\\W", "");
-        if(map) {
-            name = name + "map";
-        }
-        else {
-            name = name + "";
-        }
-        ResID = getResources().getIdentifier(name, "drawable", getPackageName());
-        return ResID;
     }
 }

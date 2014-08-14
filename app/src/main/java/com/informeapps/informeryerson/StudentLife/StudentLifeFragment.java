@@ -15,6 +15,7 @@ import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 
+import com.informeapps.informeryerson.ExploreActivity;
 import com.informeapps.informeryerson.R;
 import com.squareup.picasso.Picasso;
 

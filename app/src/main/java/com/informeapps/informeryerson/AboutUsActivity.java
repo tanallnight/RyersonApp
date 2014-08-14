@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.informeapps.informeryerson.Misc.ExpandAnimation;
 import com.viewpagerindicator.UnderlinePageIndicator;
 
 public class AboutUsActivity extends FragmentActivity implements AdapterView.OnItemClickListener {

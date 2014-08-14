@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ReminderDatabaseHandler extends SQLiteOpenHelper {
@@ -23,6 +24,7 @@ public class ReminderDatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_YEAR = "year";
     private static final String KEY_HOUR = "hour";
     private static final String KEY_MINUTES = "minutes";
+    private static final String KEY_MILLS = "milliseconds";
 
     public ReminderDatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -38,7 +40,8 @@ public class ReminderDatabaseHandler extends SQLiteOpenHelper {
                 + KEY_MONTH + " INTEGER,"
                 + KEY_YEAR + " INTEGER,"
                 + KEY_HOUR + " INTEGER,"
-                + KEY_MINUTES + " INTEGER" + ")";
+                + KEY_MINUTES + " INTEGER,"
+                + KEY_MILLS + " INTEGER" + ")";
 
         sqLiteDatabase.execSQL(CREATE_REMINDERS_TABLE);
     }
@@ -62,6 +65,12 @@ public class ReminderDatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_HOUR, reminder.get_hour());
         values.put(KEY_MINUTES, reminder.get_minute());
 
+        Calendar dateTime = Calendar.getInstance();
+        dateTime.set(reminder.get_year(), reminder.get_month(), reminder.get_day(), reminder.get_hour(), reminder.get_minute());
+        long timeMills = dateTime.getTimeInMillis();
+
+        values.put(KEY_MILLS, timeMills);
+
         database.insert(TABLE_REMINDERS, null, values);
         database.close();
     }
@@ -83,7 +92,7 @@ public class ReminderDatabaseHandler extends SQLiteOpenHelper {
 
     public List<Reminder> getAllReminders() {
         List<Reminder> reminderList = new ArrayList<Reminder>();
-        String selectQuery = "SELECT  * FROM " + TABLE_REMINDERS;
+        String selectQuery = "SELECT * FROM " + TABLE_REMINDERS + " ORDER BY " + KEY_MILLS + " ASC";
 
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
