@@ -30,7 +30,7 @@ public class CampusLifeFragment extends Fragment implements AdapterView.OnItemCl
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d("CampusLifeFragment", "onCreateView");
-        getActivity().getActionBar().setTitle("Campus Life");
+        //getActivity().getActionBar().setTitle("Campus Life");
         rootView = inflater.inflate(R.layout.fragment_campuslife, container, false);
         View header = inflater.inflate(R.layout.layout_campuslife_list_header, mListView, false);
 

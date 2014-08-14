@@ -1,4 +1,4 @@
-package com.informeapps.informeryerson.StudentLife;
+package com.informeapps.informeryerson;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,15 +17,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.informeapps.informeryerson.Misc.ExpandAnimation;
-import com.informeapps.informeryerson.R;
-
 /**
  * Created by Shahar on 2014-07-31.
  */
 public class ExploreActivity extends Activity {
 
     private boolean isRotated = false;
+
     private String Title;
 
     @Override
@@ -60,18 +58,16 @@ public class ExploreActivity extends Activity {
         ExploreViewListItems.setAdapter(ExploreListAdapter);
 
         ExploreViewListItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
 
                 View ExploreExpand = view.findViewById(R.id.EpandedInfo);
-                ExpandAnimation expandAni = new ExpandAnimation(ExploreExpand,getResources().getInteger(R.integer.ExpandAnimationDuration));
+                ExpandAnimation expandAni = new ExpandAnimation(ExploreExpand, 250);
                 ExploreExpand.startAnimation(expandAni);
 
-               ExploreViewListItems.smoothScrollToPositionFromTop(position, 0, getResources().getInteger(R.integer.SmoothScroolDuration));
+                ExploreViewListItems.smoothScrollToPositionFromTop(position, 0, 150);
 
+                //Arrow Rotation
                 ImageView icon = (ImageView) view.findViewById(R.id.imageview_explore_downicon);
-
-
                 if (!isRotated) {
                     RotateAnimation rotateAnimation = new RotateAnimation(180, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                     rotateAnimation.setDuration(250);
@@ -120,6 +116,11 @@ public class ExploreActivity extends Activity {
             //StoreLogo.setImageResource(ResourceID(getItem(position)));//set the image resource
             StoreLogo.setImageResource(R.raw.campuslife_header);
 
+            View toolbar = convertView.findViewById(R.id.EpandedInfo);
+            ((LinearLayout.LayoutParams) toolbar.getLayoutParams()).bottomMargin = -50;
+            toolbar.setVisibility(View.GONE);
+
+            //Favourites button click listener
             final ImageButton fav = (ImageButton) convertView.findViewById(R.id.imagebutton_explore_list_favourite);
             fav.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -138,17 +139,13 @@ public class ExploreActivity extends Activity {
                                     new ScaleAnimation(0, 1, 0, 1, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                             scaleUp.setFillAfter(true);
                             scaleUp.setFillEnabled(true);
-                            scaleUp.setDuration(1500);
+                            scaleUp.setDuration(150l);
                             fav.startAnimation(scaleUp);
                             fav.setImageResource(R.drawable.ic_favourite_activated);
                         }
                     }, 150);
                 }
             });
-
-            View ExpandLayut = convertView.findViewById(R.id.EpandedInfo);
-            ((LinearLayout.LayoutParams) ExpandLayut.getLayoutParams()).bottomMargin = -200;
-            ExpandLayut.setVisibility(View.GONE);
 
             return convertView;
         }

@@ -17,8 +17,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.informeapps.informeryerson.FloatingActionButton;
-import com.informeapps.informeryerson.R;
 import com.informeapps.informeryerson.Misc.SwipeDismissListViewTouchListener;
+import com.informeapps.informeryerson.R;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class RemindersFragments extends Fragment implements AdapterView.OnItemCl
         rootView = inflater.inflate(R.layout.fragment_campuslife_reminders, container, false);//setting layout
         getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);//for going back
 
-       //handles database
+        //handles database
         databaseHandler = new ReminderDatabaseHandler(getActivity());
         reminders = databaseHandler.getAllReminders();
 
@@ -66,7 +66,7 @@ public class RemindersFragments extends Fragment implements AdapterView.OnItemCl
                                 for (int position : reverseSortedPositions) {
                                     databaseHandler.deleteReminder(reminders.get(position));
                                 }
-                               adapter.notifyDataSetChanged();
+                                adapter.notifyDataSetChanged();
                             }
                         });
 

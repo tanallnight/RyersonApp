@@ -23,8 +23,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.informeapps.informeryerson.StudentLife.StudentLifeFragment;
-
 
 public class MainActivity extends FragmentActivity implements AdapterView.OnItemClickListener {
 
@@ -41,12 +39,12 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
         super.onCreate(savedInstanceState);
         Log.d("MainActivity", "onCreate");
         setContentView(R.layout.activity_main);
-
+        getActionBar().setDisplayShowTitleEnabled(false);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 
         if (savedInstanceState == null) {
-            getActionBar().setTitle(mDrawerItems[0]);
+            getActionBar().setIcon(R.drawable.ic_ab_campuslife);
             getSupportFragmentManager().beginTransaction()
                     .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
                     .add(R.id.content_frame_main, new CampusLifeFragment())
@@ -68,14 +66,14 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
                 invalidateOptionsMenu();
-                getActionBar().setTitle(mDrawerItems[visibleFragment]);
+                getActionBar().setIcon(R.drawable.ic_ab_campuslife);
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 invalidateOptionsMenu();
-                getActionBar().setTitle("Ryerson App");
+                getActionBar().setIcon(R.drawable.ic_ab_appname);
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -137,9 +135,9 @@ public class MainActivity extends FragmentActivity implements AdapterView.OnItem
                     setVisibleFragment(i);
                     break;
                 case 1:
-                    isFragment = true;
-                    fragment = new StudentLifeFragment();
-                    setVisibleFragment(i);
+                    isFragment = false;
+                    /*fragment = new StudentLifeFragment();
+                    setVisibleFragment(i);*/
                     break;
                 case 2:
                     isFragment = false;

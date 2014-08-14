@@ -2,11 +2,15 @@ package com.informeapps.informeryerson.CampusMap;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.informeapps.informeryerson.R;
@@ -16,15 +20,19 @@ import com.informeapps.informeryerson.R;
  */
 public class CampusMapActivity extends Activity {
 
+    private String mapsUrl = "https://m.ryerson.ca/core_apps/map/beta/";
+    private WebView webView;
+    private ProgressBar progressBar;
+    private TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        getWindow().requestFeature(Window.FEATURE_PROGRESS);
         setContentView(R.layout.activity_campusmap);
 
-        WebView webView = (WebView) findViewById(R.id.webview_campusmap);
+        webView = (WebView) findViewById(R.id.webview_campusmap);
+        //progressBar = (ProgressBar) findViewById(R.id.progressBar_campusmap);
+        textView = (TextView) findViewById(R.id.textview_campusmap_progress);
 
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
@@ -33,34 +41,55 @@ public class CampusMapActivity extends Activity {
 
         webView.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int progress) {
-                activity.setProgress(progress * 100);
+                if (progress != 100) {
+                    textView.setText(progress + "%");
+                    //progressBar.setProgress(progress);
+                } else {
+                    textView.setVisibility(View.GONE);
+                    //progressBar.setVisibility(View.GONE);
+                }
             }
         });
         webView.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (url.equals(mapsUrl)) {
+                    view.loadUrl(url);
+                }
+
+                return true;
+            }
+
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 Toast.makeText(activity, "Oh no! Please Check Internet Connection", Toast.LENGTH_SHORT).show();
             }
         });
 
-        webView.loadUrl("https://m.ryerson.ca/core_apps/map/beta/");
+        webView.loadUrl(mapsUrl);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.campusmap_menu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_campusmap_refresh:
+                webView.reload();
+                textView.setText("0%");
+                textView.setVisibility(View.VISIBLE);
+                //progressBar.setVisibility(View.VISIBLE);
+                //progressBar.setProgress(0);
+                return true;
+        }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return super.onOptionsItemSelected(item);
+    }
 
     /*
     private GoogleMap googleMap;
