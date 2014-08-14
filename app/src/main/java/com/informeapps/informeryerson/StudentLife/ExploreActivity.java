@@ -17,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.informeapps.informeryerson.Misc.ExpandAnimation;
+
 /**
  * Created by Shahar on 2014-07-31.
  */
